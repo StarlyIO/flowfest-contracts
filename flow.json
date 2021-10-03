@@ -1,0 +1,132 @@
+{
+  "emulators": {
+    "default": {
+      "port": 3569,
+      "serviceAccount": "emulator-account"
+    }
+  },
+  "contracts": {
+    "ChainmonstersMarketplace": {
+      "source": "./contracts/ChainmonstersMarketplace.cdc",
+      "aliases": {
+        "testnet": "0x697d72a988a77070"
+      }
+    },
+    "ChainmonstersRewards": {
+      "source": "./contracts/ChainmonstersRewards.cdc",
+      "aliases": {
+        "testnet": "0x697d72a988a77070"
+      }
+    },
+    "FlowStorageFees": {
+      "source": "./contracts/FlowStorageFees.cdc",
+      "aliases": {
+        "emulator": "0xf8d6e0586b0a20c7",
+        "testnet": "0x8c5303eaa26202d6"
+      }
+    },
+    "FlowToken": {
+      "source": "./contracts/FlowToken.cdc",
+      "aliases": {
+        "emulator": "0x0ae53cb6e3f42a79",
+        "testnet": "0x7e60df042a9c0868"
+      }
+    },
+    "FungibleToken": {
+      "source": "./contracts/FungibleToken.cdc",
+      "aliases": {
+        "emulator": "0xee82856bf20e2aa6",
+        "testnet": "0xc19f2afbef1070d2"
+      }
+    },
+    "FUSD": {
+      "source": "./contracts/FUSD.cdc",
+      "aliases": {
+        "testnet": "0xe223d8a629e49c68"
+      }
+    },
+    "KOTD": {
+      "source": "./contracts/KOTD.cdc",
+      "aliases": {
+        "testnet": "0x9a0766d93b6608b7"
+      }
+    },
+    "Mynft": {
+      "source": "./contracts/Mynft.cdc",
+      "aliases": {
+        "testnet": "0x9a0766d93b6608b7"
+      }
+    },
+    "NonFungibleToken": {
+      "source": "./contracts/NonFungibleToken.cdc",
+      "aliases": {
+        "testnet": "0x631e88ae7f1d7c20"
+      }
+    },
+    "StarlyCard": {
+      "source": "./contracts/StarlyCard.cdc",
+      "aliases": {
+        "testnet": "0x697d72a988a77070"
+      }
+    },
+    "StarlyCardMarket": {
+      "source": "./contracts/StarlyCardMarket.cdc",
+      "aliases": {
+        "testnet": "0x697d72a988a77070"
+      }
+    },
+    "Vouchers": {
+      "source": "./contracts/Vouchers.cdc",
+      "aliases": {
+        "testnet": "0x9a0766d93b6608b7"
+      }
+    }
+  },
+  "networks": {
+    "emulator": {
+      "host": "127.0.0.1:3569",
+      "chain": "flow-emulator"
+    },
+    "mainnet": {
+      "host": "access.mainnet.nodes.onflow.org:9000",
+      "chain": "flow-mainnet"
+    },
+    "testnet": {
+      "host": "access.devnet.nodes.onflow.org:9000",
+      "chain": "flow-testnet"
+    }
+  },
+  "accounts": {
+    "emulator-account": {
+      "address": "f8d6e0586b0a20c7",
+      "keys": "4c13162bd35758146b7908ddb3a1d001dbe961ec422f96045524a0099e9ff083",
+      "chain": "flow-emulator"
+    },
+    "emulator-debug": {
+      "address": "0x01cf0e2f2f715450",
+      "keys": "d79d5463297ad3dced6f5fd71feb7c3e991e9f315d64b5ec717087ee8758c9e7",
+      "chain": "flow-emulator"
+    }
+  },
+  "devWallet": {
+    "accessNode": {
+      "endpoint": "http://localhost:8080"
+    },
+    "port": 8701
+  },
+  "deployments": {
+    "emulator": {
+      "emulator-account": [
+        "ChainmonstersMarketplace",
+        "ChainmonstersRewards",
+        "FUSD",
+        "KOTD",
+        "Mynft",
+        "NonFungibleToken",
+        "StarlyCard",
+        "StarlyCardMarket",
+        "Vouchers"
+      ]
+    }
+  }
+}

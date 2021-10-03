@@ -1,3 +1,4 @@
+import Art from "../contracts/Art.cdc"
 import ChainmonstersMarketplace from "../contracts/ChainmonstersMarketplace.cdc"
 import ChainmonstersRewards from "../contracts/ChainmonstersRewards.cdc"
 import FungibleToken from "../contracts/FungibleToken.cdc"
@@ -5,9 +6,16 @@ import FUSD from "../contracts/FUSD.cdc"
 import KOTD from "../contracts/KOTD.cdc"
 import Mynft from "../contracts/Mynft.cdc"
 import NonFungibleToken from "../contracts/NonFungibleToken.cdc"
+import Shard from "../contracts/Shard.cdc"
 import StarlyCard from "../contracts/StarlyCard.cdc"
 import StarlyCardMarket from "../contracts/StarlyCardMarket.cdc"
 import Vouchers from "../contracts/Vouchers.cdc"
+
+pub fun hasArt(_ address: Address): Bool {
+    return getAccount(address)
+        .getCapability<&{Art.CollectionPublic}>(Art.CollectionPublicPath)
+        .check()
+}
 
 pub fun hasChainmonstersMarketplace(_ address: Address): Bool {
     return getAccount(address)
@@ -43,6 +51,12 @@ pub fun hasMynft(_ address: Address): Bool {
         .check()
 }
 
+pub fun hasShard(_ address: Address): Bool {
+    return getAccount(address)
+        .getCapability<&Shard.Collection>(/public/ShardCollection)
+        .check()
+}
+
 pub fun hasStarlyCard(_ address: Address): Bool {
     return getAccount(address)
         .getCapability<&StarlyCard.Collection{NonFungibleToken.CollectionPublic, StarlyCard.StarlyCardCollectionPublic}>(StarlyCard.CollectionPublicPath)
@@ -63,11 +77,13 @@ pub fun hasXtingles(_ address: Address): Bool {
 
 pub fun main(address: Address): {String: Bool} {
     let ret: {String: Bool} = {}
+    ret["Art"] = hasArt(address)
     ret["ChainmonstersMarketplace"] = hasChainmonstersMarketplace(address)
     ret["ChainmonstersRewards"] = hasChainmonstersRewards(address)
     ret["FUSD"] = hasFUSD(address)
     ret["KOTD"] = hasKOTD(address)
     ret["Mynft"] = hasMynft(address)
+    ret["Shard"] = hasShard(address)
     ret["StarlyCard"] = hasStarlyCard(address)
     ret["StarlyCardMarket"] = hasStarlyCardMarket(address)
     ret["Xtingles"] = hasXtingles(address)

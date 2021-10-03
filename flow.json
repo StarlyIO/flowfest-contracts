@@ -6,16 +6,32 @@
     }
   },
   "contracts": {
+    "Art": {
+      "source": "./contracts/Art.cdc",
+      "aliases": {
+        "testnet": "0x99ca04281098b33d",
+        "mainnet": "0xd796ff17107bbff6"
+      }
+    },
     "ChainmonstersMarketplace": {
       "source": "./contracts/ChainmonstersMarketplace.cdc",
       "aliases": {
-        "testnet": "0x697d72a988a77070"
+        "testnet": "0x75783e3c937304a8",
+        "mainnet": "0x64f83c60989ce555"
       }
     },
     "ChainmonstersRewards": {
       "source": "./contracts/ChainmonstersRewards.cdc",
       "aliases": {
-        "testnet": "0x697d72a988a77070"
+        "testnet": "0x75783e3c937304a8",
+        "mainnet": "0x93615d25d14fa337"
+      }
+    },
+    "Content": {
+      "source": "./contracts/Content.cdc",
+      "aliases": {
+        "testnet": "0x99ca04281098b33d",
+        "mainnet": "0xd796ff17107bbff6"
       }
     },
     "FlowStorageFees": {
@@ -29,20 +45,23 @@
       "source": "./contracts/FlowToken.cdc",
       "aliases": {
         "emulator": "0x0ae53cb6e3f42a79",
-        "testnet": "0x7e60df042a9c0868"
+        "testnet": "0x7e60df042a9c0868",
+        "mainnet": "0x1654653399040a61"
       }
     },
     "FungibleToken": {
       "source": "./contracts/FungibleToken.cdc",
       "aliases": {
         "emulator": "0xee82856bf20e2aa6",
-        "testnet": "0xc19f2afbef1070d2"
+        "testnet": "0x9a0766d93b6608b7",
+        "mainnet": "0xf233dcee88fe0abe"
       }
     },
     "FUSD": {
       "source": "./contracts/FUSD.cdc",
       "aliases": {
-        "testnet": "0xe223d8a629e49c68"
+        "testnet": "0xe223d8a629e49c68",
+        "mainnet": "0x3c5959b568896393"
       }
     },
     "KOTD": {
@@ -63,22 +82,30 @@
         "testnet": "0x631e88ae7f1d7c20"
       }
     },
+    "Shard": {
+      "source": "./contracts/Shard.cdc",
+      "aliases": {
+        "testnet": "0x462b4dac28de23f3"
+      }
+    },
     "StarlyCard": {
       "source": "./contracts/StarlyCard.cdc",
       "aliases": {
-        "testnet": "0x697d72a988a77070"
+        "testnet": "0x697d72a988a77070",
+        "mainnet": "0x5b82f21c0edf76e3"
       }
     },
     "StarlyCardMarket": {
       "source": "./contracts/StarlyCardMarket.cdc",
       "aliases": {
-        "testnet": "0x697d72a988a77070"
+        "testnet": "0x697d72a988a77070",
+        "mainnet": "0x5b82f21c0edf76e3"
       }
     },
     "Vouchers": {
       "source": "./contracts/Vouchers.cdc",
       "aliases": {
-        "testnet": "0x9a0766d93b6608b7"
+        "testnet": "0xc19f2afbef1070d2"
       }
     }
   },
@@ -117,12 +144,15 @@
   "deployments": {
     "emulator": {
       "emulator-account": [
+        "Art",
         "ChainmonstersMarketplace",
         "ChainmonstersRewards",
+        "Content",
         "FUSD",
         "KOTD",
         "Mynft",
         "NonFungibleToken",
+        "Shard",
         "StarlyCard",
         "StarlyCardMarket",
         "Vouchers"

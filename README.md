@@ -29,4 +29,4 @@
 
 | Name                     | Testnet            | Mainnet            |
 | ------------------------ | ------------------ | ------------------ |
-| Starly FF Admin          | 0x22a706cc6b8fe63b | TBD                |
+| Starly FF Admin          | 0x22a706cc6b8fe63b | 0x5f14b7e68e0bc3c3 |

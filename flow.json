@@ -6,13 +6,6 @@
     }
   },
   "contracts": {
-    "Art": {
-      "source": "./contracts/Art.cdc",
-      "aliases": {
-        "testnet": "0x99ca04281098b33d",
-        "mainnet": "0xd796ff17107bbff6"
-      }
-    },
     "ChainmonstersMarketplace": {
       "source": "./contracts/ChainmonstersMarketplace.cdc",
       "aliases": {
@@ -25,13 +18,6 @@
       "aliases": {
         "testnet": "0x75783e3c937304a8",
         "mainnet": "0x93615d25d14fa337"
-      }
-    },
-    "Content": {
-      "source": "./contracts/Content.cdc",
-      "aliases": {
-        "testnet": "0x99ca04281098b33d",
-        "mainnet": "0xd796ff17107bbff6"
       }
     },
     "FlowStorageFees": {
@@ -144,10 +130,8 @@
   "deployments": {
     "emulator": {
       "emulator-account": [
-        "Art",
         "ChainmonstersMarketplace",
         "ChainmonstersRewards",
-        "Content",
         "FUSD",
         "KOTD",
         "Mynft",

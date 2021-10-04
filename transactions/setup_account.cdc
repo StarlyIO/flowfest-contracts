@@ -1,4 +1,3 @@
-import Art from "../contracts/Art.cdc"
 import ChainmonstersMarketplace from "../contracts/ChainmonstersMarketplace.cdc"
 import ChainmonstersRewards from "../contracts/ChainmonstersRewards.cdc"
 import FungibleToken from "../contracts/FungibleToken.cdc"
@@ -10,12 +9,6 @@ import Shard from "../contracts/Shard.cdc"
 import StarlyCard from "../contracts/StarlyCard.cdc"
 import StarlyCardMarket from "../contracts/StarlyCardMarket.cdc"
 import Vouchers from "../contracts/Vouchers.cdc"
-
-pub fun hasArt(_ address: Address): Bool {
-    return getAccount(address)
-        .getCapability<&{Art.CollectionPublic}>(Art.CollectionPublicPath)
-        .check()
-}
 
 pub fun hasChainmonstersMarketplace(_ address: Address): Bool {
     return getAccount(address)
@@ -51,6 +44,12 @@ pub fun hasMynft(_ address: Address): Bool {
         .check()
 }
 
+pub fun hasShard(_ address: Address): Bool {
+    return getAccount(address)
+        .getCapability<&{NonFungibleToken.CollectionPublic}>(/public/ShardCollection)
+        .check()
+}
+
 pub fun hasStarlyCard(_ address: Address): Bool {
     return getAccount(address)
         .getCapability<&StarlyCard.Collection{NonFungibleToken.CollectionPublic, StarlyCard.StarlyCardCollectionPublic}>(StarlyCard.CollectionPublicPath)
@@ -63,12 +62,6 @@ pub fun hasStarlyCardMarket(_ address: Address): Bool {
         .check()
 }
 
-pub fun hasShard(_ address: Address): Bool {
-    return getAccount(address)
-        .getCapability<&Shard.Collection>(/public/ShardCollection)
-        .check()
-}
-
 pub fun hasXtingles(_ address: Address): Bool {
     return getAccount(address)
         .getCapability<&{Vouchers.CollectionPublic}>(Vouchers.CollectionPublicPath)
@@ -77,12 +70,6 @@ pub fun hasXtingles(_ address: Address): Bool {
 
 transaction {
     prepare(acct: AuthAccount) {
-        if !hasArt(acct.address) {
-             if acct.borrow<&{Art.CollectionPublic}>(from: Art.CollectionStoragePath) == nil {
-                 acct.save(<-Art.createEmptyCollection(), to: Art.CollectionStoragePath)
-             }
-             acct.link<&{Art.CollectionPublic}>(Art.CollectionPublicPath, target: Art.CollectionStoragePath)
-        }
         if !hasChainmonstersMarketplace(acct.address) {
              if acct.borrow<&ChainmonstersMarketplace.Collection>(from: ChainmonstersMarketplace.CollectionStoragePath) == nil {
                  acct.save(<-ChainmonstersMarketplace.createEmptyCollection(), to: ChainmonstersMarketplace.CollectionStoragePath)
@@ -115,7 +102,7 @@ transaction {
              acct.link<&Mynft.Collection{NonFungibleToken.CollectionPublic, Mynft.MynftCollectionPublic}>(Mynft.CollectionPublicPath, target: Mynft.CollectionStoragePath)
         }
         if !hasShard(acct.address) {
-             if acct.borrow<&Shard.Collection>(from: /storage/ShardCollectionh) == nil {
+             if acct.borrow<&Shard.Collection>(from: /storage/ShardCollection) == nil {
                  acct.save(<-Shard.createEmptyCollection(), to: /storage/ShardCollection)
              }
              acct.link<&{NonFungibleToken.CollectionPublic}>(/public/ShardCollection, target: /storage/ShardCollection)

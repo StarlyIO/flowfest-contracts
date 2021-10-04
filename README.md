@@ -2,17 +2,17 @@
 
 * `flow emulator`
 * `flow project deploy`
-* `flow transactions send transactions/setup_account.cdc`
-* `flow scripts execute scripts/setup_check.cdc 0xf8d6e0586b0a20c7`
+* `flow accounts create --key e00591c315b218996e6d4372688dd7644d42dc1b80c19551339017a640a88088fa56ec7a5e33475c5284f98b13a2acfc8214631c8ca8ca6aec5f9bb6b665ba1c`
+* `flow scripts execute scripts/setup_check.cdc 0x01cf0e2f2f715450`
+* `flow transactions send transactions/setup_account.cdc --signer emulator-debug`
+* `flow scripts execute scripts/setup_check.cdc 0x01cf0e2f2f715450`
 
 # Contract addresses
 
 | Contract                 | Testnet            | Mainnet            |
 | ------------------------ | ------------------ | ------------------ |
-| Art (Versus)             | 0x99ca04281098b33d | 0xd796ff17107bbff6 |
 | ChainmonstersMarketplace | 0x75783e3c937304a8 | 0x64f83c60989ce555 |
 | ChainmonstersRewards     | 0x75783e3c937304a8 | 0x93615d25d14fa337 |
-| Content (Versus)         | 0x99ca04281098b33d | 0xd796ff17107bbff6 |
 | FlowStorageFees          | 0x8c5303eaa26202d6 | 0xe467b9dd11fa00df |
 | FlowToken                | 0x7e60df042a9c0868 | 0x1654653399040a61 |
 | FungibleToken            | 0x9a0766d93b6608b7 | 0xf233dcee88fe0abe |

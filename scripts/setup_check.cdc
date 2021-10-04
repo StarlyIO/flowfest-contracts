@@ -1,4 +1,3 @@
-import Art from "../contracts/Art.cdc"
 import ChainmonstersMarketplace from "../contracts/ChainmonstersMarketplace.cdc"
 import ChainmonstersRewards from "../contracts/ChainmonstersRewards.cdc"
 import FungibleToken from "../contracts/FungibleToken.cdc"
@@ -10,12 +9,6 @@ import Shard from "../contracts/Shard.cdc"
 import StarlyCard from "../contracts/StarlyCard.cdc"
 import StarlyCardMarket from "../contracts/StarlyCardMarket.cdc"
 import Vouchers from "../contracts/Vouchers.cdc"
-
-pub fun hasArt(_ address: Address): Bool {
-    return getAccount(address)
-        .getCapability<&{Art.CollectionPublic}>(Art.CollectionPublicPath)
-        .check()
-}
 
 pub fun hasChainmonstersMarketplace(_ address: Address): Bool {
     return getAccount(address)
@@ -53,7 +46,7 @@ pub fun hasMynft(_ address: Address): Bool {
 
 pub fun hasShard(_ address: Address): Bool {
     return getAccount(address)
-        .getCapability<&Shard.Collection>(/public/ShardCollection)
+        .getCapability<&{NonFungibleToken.CollectionPublic}>(/public/ShardCollection)
         .check()
 }
 
@@ -77,7 +70,6 @@ pub fun hasXtingles(_ address: Address): Bool {
 
 pub fun main(address: Address): {String: Bool} {
     let ret: {String: Bool} = {}
-    ret["Art"] = hasArt(address)
     ret["ChainmonstersMarketplace"] = hasChainmonstersMarketplace(address)
     ret["ChainmonstersRewards"] = hasChainmonstersRewards(address)
     ret["FUSD"] = hasFUSD(address)

@@ -24,12 +24,13 @@
 | FlowStorageFees          | 0x8c5303eaa26202d6 | 0xe467b9dd11fa00df |
 | FlowToken                | 0x7e60df042a9c0868 | 0x1654653399040a61 |
 | FungibleToken            | 0x9a0766d93b6608b7 | 0xf233dcee88fe0abe |
+| FUSD                     | 0xe223d8a629e49c68 | 0x3c5959b568896393 |
+| Gaia (Ballers)           | 0xc523a8bbf10fc4a3 | TBD                |
 | KLKTN                    | 0x336895dbe44c4b44 | 0xabd6e80be7e9682c |
 | KOTD                     | 0x6085ae87e78e1433 | 0x23dddd854fcc8c6f |
 | MatrixWorldFlowFestNFT   | 0xe2f1b000e0203c1d | 0x2d2750f240198f91 |
 | MusicBlock (Melos)       | 0xeb3241ad7d7881db | 0x3b73da28c2a82eef |
 | Mynft                    | 0x1eced429f2012ef0 | 0xf6fcbef550d97aa5 |
-| FUSD                     | 0xe223d8a629e49c68 | 0x3c5959b568896393 |
 | NonFungibleToken         | 0x631e88ae7f1d7c20 | 0x1d7e57aa55817448 |
 | NyatheesOVO              | 0xacf3dfa413e00f9f | 0x75e0b6de94eb05d0 |
 | RareRooms (GigLabs)      | TBD                | 0x329feb3ab062d289 |

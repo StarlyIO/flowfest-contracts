@@ -9,6 +9,7 @@ import Everbloom from "../contracts/Everbloom.cdc"
 import FantastecNFT from "../contracts/FantastecNFT.cdc"
 import FungibleToken from "../contracts/FungibleToken.cdc"
 import FUSD from "../contracts/FUSD.cdc"
+import Gaia from "../contracts/Gaia.cdc"
 import KlktnNFT from "../contracts/KlktnNFT.cdc"
 import KOTD from "../contracts/KOTD.cdc"
 import MatrixWorldFlowFestNFT from "../contracts/MatrixWorldFlowFestNFT.cdc"
@@ -80,6 +81,12 @@ pub fun hasFUSD(_ address: Address): Bool {
         .getCapability<&FUSD.Vault{FungibleToken.Balance}>(/public/fusdBalance)
         .check()
     return receiver && balance
+}
+
+pub fun hasGaia(_ address: Address): Bool {
+    return getAccount(address)
+        .getCapability<&{Gaia.CollectionPublic}>(Gaia.CollectionPublicPath)
+        .check()
 }
 
 pub fun hasJambb(_ address: Address): Bool {
@@ -222,6 +229,12 @@ transaction {
             }
             acct.link<&FUSD.Vault{FungibleToken.Receiver}>(/public/fusdReceiver, target: /storage/fusdVault)
             acct.link<&FUSD.Vault{FungibleToken.Balance}>(/public/fusdBalance, target: /storage/fusdVault)
+        }
+        if !hasGaia(acct.address) {
+            if acct.borrow<&Gaia.Collection>(from: Gaia.CollectionStoragePath) == nil {
+                acct.save(<-Gaia.createEmptyCollection(), to: Gaia.CollectionStoragePath)
+            }
+            acct.link<&{Gaia.CollectionPublic}>(Gaia.CollectionPublicPath, target: Gaia.CollectionStoragePath)
         }
         if !hasJambb(acct.address) {
              if acct.borrow<&Vouchers.Collection>(from: Vouchers.CollectionStoragePath) == nil {

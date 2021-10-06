@@ -9,6 +9,7 @@ import Everbloom from "../contracts/Everbloom.cdc"
 import FantastecNFT from "../contracts/FantastecNFT.cdc"
 import FungibleToken from "../contracts/FungibleToken.cdc"
 import FUSD from "../contracts/FUSD.cdc"
+import Gaia from "../contracts/Gaia.cdc"
 import KlktnNFT from "../contracts/KlktnNFT.cdc"
 import KOTD from "../contracts/KOTD.cdc"
 import MatrixWorldFlowFestNFT from "../contracts/MatrixWorldFlowFestNFT.cdc"
@@ -80,6 +81,12 @@ pub fun hasFUSD(_ address: Address): Bool {
         .getCapability<&FUSD.Vault{FungibleToken.Balance}>(/public/fusdBalance)
         .check()
     return receiver && balance
+}
+
+pub fun hasGaia(_ address: Address): Bool {
+    return getAccount(address)
+        .getCapability<&{Gaia.CollectionPublic}>(Gaia.CollectionPublicPath)
+        .check()
 }
 
 pub fun hasJambb(_ address: Address): Bool {
@@ -177,6 +184,7 @@ pub fun main(address: Address): {String: Bool} {
     ret["Everbloom"] = hasEverbloom(address)
     ret["Fantastec"] = hasFantastec(address)
     ret["FUSD"] = hasFUSD(address)
+    ret["Gaia"] = hasGaia(address)
     ret["Jambb"] = hasJambb(address)
     ret["KLKTN"] = hasKLKTN(address)
     ret["KOTD"] = hasKOTD(address)

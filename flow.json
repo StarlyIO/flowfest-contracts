@@ -110,6 +110,12 @@
         "mainnet": "0x3c5959b568896393"
       }
     },
+    "Gaia": {
+      "source": "./contracts/Gaia.cdc",
+      "aliases": {
+        "testnet": "0xc523a8bbf10fc4a3"
+      }
+    },
     "KlktnNFT": {
       "source": "./contracts/KlktnNFT.cdc",
       "aliases": {
@@ -269,6 +275,7 @@
         "FantastecNFT",
         "FantastecSwapData",
         "FUSD",
+        "Gaia",
         "KlktnNFT",
         "KOTD",
         "MatrixWorldFlowFestNFT",

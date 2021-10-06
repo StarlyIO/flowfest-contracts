@@ -6,6 +6,13 @@
     }
   },
   "contracts": {
+    "CaaArts": {
+      "source": "./contracts/CaaArts.cdc",
+      "aliases": {
+        "testnet": "0x40f8432d29f27695",
+        "mainnet": "0x98c9c2e548b84d31"
+      }
+    },
     "ChainmonstersMarketplace": {
       "source": "./contracts/ChainmonstersMarketplace.cdc",
       "aliases": {
@@ -18,6 +25,46 @@
       "aliases": {
         "testnet": "0x75783e3c937304a8",
         "mainnet": "0x93615d25d14fa337"
+      }
+    },
+    "Collectible": {
+      "source": "./contracts/Collectible.cdc",
+      "aliases": {
+        "testnet": "0x85080f371da20cc1",
+        "mainnet": "0xf5b0eb433389ac3f"
+      }
+    },
+    "Crave": {
+      "source": "./contracts/Crave.cdc",
+      "aliases": {
+        "testnet": "0x6085ae87e78e1433",
+        "mainnet": "0x6d008a788fc27265"
+      }
+    },
+    "Edition": {
+      "source": "./contracts/Edition.cdc",
+      "aliases": {
+        "testnet": "0x85080f371da20cc1",
+        "mainnet": "0xf5b0eb433389ac3f"
+      }
+    },
+    "Everbloom": {
+      "source": "./contracts/Everbloom.cdc",
+      "aliases": {
+        "testnet": "0xf30d2f642de8c895",
+        "mainnet": "0xe703f7fee6400754"
+      }
+    },
+    "FantastecNFT": {
+      "source": "./contracts/FantastecNFT.cdc",
+      "aliases": {
+        "testnet": "0x7b4fab78fbddc57e"
+      }
+    },
+    "FantastecSwapData": {
+      "source": "./contracts/FantastecSwapData.cdc",
+      "aliases": {
+        "testnet": "0x7b4fab78fbddc57e"
       }
     },
     "FlowStorageFees": {
@@ -50,16 +97,39 @@
         "mainnet": "0x3c5959b568896393"
       }
     },
+    "KlktnNFT": {
+      "source": "./contracts/KlktnNFT.cdc",
+      "aliases": {
+        "testnet": "0x336895dbe44c4b44",
+        "mainnet": "0xabd6e80be7e9682c"
+      }
+    },
     "KOTD": {
       "source": "./contracts/KOTD.cdc",
       "aliases": {
-        "testnet": "0x9a0766d93b6608b7"
+        "testnet": "0x6085ae87e78e1433",
+        "mainnet": "0x23dddd854fcc8c6f"
+      }
+    },
+    "MatrixWorldFlowFestNFT": {
+      "source": "./contracts/MatrixWorldFlowFestNFT.cdc",
+      "aliases": {
+        "testnet": "0xe2f1b000e0203c1d",
+        "mainnet": "0x2d2750f240198f91"
+      }
+    },
+    "MusicBlock": {
+      "source": "./contracts/MusicBlock.cdc",
+      "aliases": {
+        "testnet": "0xeb3241ad7d7881db",
+        "mainnet": "0x3b73da28c2a82eef"
       }
     },
     "Mynft": {
       "source": "./contracts/Mynft.cdc",
       "aliases": {
-        "testnet": "0x9a0766d93b6608b7"
+        "testnet": "0x1eced429f2012ef0",
+        "mainnet": "0xf6fcbef550d97aa5"
       }
     },
     "NonFungibleToken": {
@@ -68,10 +138,51 @@
         "testnet": "0x631e88ae7f1d7c20"
       }
     },
+    "NyatheesOVO": {
+      "source": "./contracts/NyatheesOVO.cdc",
+      "aliases": {
+        "testnet": "0xacf3dfa413e00f9f",
+        "mainnet": "0x75e0b6de94eb05d0"
+      }
+    },
+    "RareRooms_NFT": {
+      "source": "./contracts/RareRooms_NFT.cdc",
+      "aliases": {
+        "mainnet": "0x329feb3ab062d289"
+      }
+    },
+    "RCRDSHPNFT": {
+      "source": "./contracts/RCRDSHPNFT.cdc",
+      "aliases": {
+        "testnet": "0x95d41a94b49a1ed1",
+        "mainnet": "0x6c3ff40b90b928ab"
+      }
+    },
     "Shard": {
       "source": "./contracts/Shard.cdc",
       "aliases": {
         "testnet": "0x462b4dac28de23f3"
+      }
+    },
+    "SportsIconBeneficiaries": {
+      "source": "./contracts/SportsIconBeneficiaries.cdc",
+      "aliases": {
+        "testnet": "0xc2824327396d3a39",
+        "mainnet": "0x8de96244f54db422"
+      }
+    },
+    "SportsIconCollectible": {
+      "source": "./contracts/SportsIconCollectible.cdc",
+      "aliases": {
+        "testnet": "0xc2824327396d3a39",
+        "mainnet": "0x8de96244f54db422"
+      }
+    },
+    "SportsIconCounter": {
+      "source": "./contracts/SportsIconCounter.cdc",
+      "aliases": {
+        "testnet": "0xc2824327396d3a39",
+        "mainnet": "0x8de96244f54db422"
       }
     },
     "StarlyCard": {
@@ -91,7 +202,8 @@
     "Vouchers": {
       "source": "./contracts/Vouchers.cdc",
       "aliases": {
-        "testnet": "0xc19f2afbef1070d2"
+        "testnet": "0xc19f2afbef1070d2",
+        "mainnet": "0x444f5ea22c6ea12c"
       }
     }
   },
@@ -130,13 +242,29 @@
   "deployments": {
     "emulator": {
       "emulator-account": [
+        "CaaArts",
         "ChainmonstersMarketplace",
         "ChainmonstersRewards",
+        "Collectible",
+        "Crave",
+        "Edition",
+        "Everbloom",
+        "FantastecNFT",
+        "FantastecSwapData",
         "FUSD",
+        "KlktnNFT",
         "KOTD",
+        "MatrixWorldFlowFestNFT",
+        "MusicBlock",
         "Mynft",
         "NonFungibleToken",
+        "NyatheesOVO",
+        "RareRooms_NFT",
+        "RCRDSHPNFT",
         "Shard",
+        "SportsIconBeneficiaries",
+        "SportsIconCollectible",
+        "SportsIconCounter",
         "StarlyCard",
         "StarlyCardMarket",
         "Vouchers"

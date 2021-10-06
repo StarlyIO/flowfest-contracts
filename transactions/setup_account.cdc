@@ -1,14 +1,32 @@
+import CaaArts from "../contracts/CaaArts.cdc"
 import ChainmonstersMarketplace from "../contracts/ChainmonstersMarketplace.cdc"
 import ChainmonstersRewards from "../contracts/ChainmonstersRewards.cdc"
+import Collectible from "../contracts/Collectible.cdc"
+import Crave from "../contracts/Crave.cdc"
+import Everbloom from "../contracts/Everbloom.cdc"
+import FantastecNFT from "../contracts/FantastecNFT.cdc"
 import FungibleToken from "../contracts/FungibleToken.cdc"
 import FUSD from "../contracts/FUSD.cdc"
+import KlktnNFT from "../contracts/KlktnNFT.cdc"
 import KOTD from "../contracts/KOTD.cdc"
+import MatrixWorldFlowFestNFT from "../contracts/MatrixWorldFlowFestNFT.cdc"
+import MusicBlock from "../contracts/MusicBlock.cdc"
 import Mynft from "../contracts/Mynft.cdc"
 import NonFungibleToken from "../contracts/NonFungibleToken.cdc"
+import NyatheesOVO from "../contracts/NyatheesOVO.cdc"
+import RareRooms_NFT from "../contracts/RareRooms_NFT.cdc"
+import RCRDSHPNFT from "../contracts/RCRDSHPNFT.cdc"
 import Shard from "../contracts/Shard.cdc"
+import SportsIconCollectible from "../contracts/SportsIconCollectible.cdc"
 import StarlyCard from "../contracts/StarlyCard.cdc"
 import StarlyCardMarket from "../contracts/StarlyCardMarket.cdc"
 import Vouchers from "../contracts/Vouchers.cdc"
+
+pub fun hasCaaArts(_ address: Address): Bool {
+    return getAccount(address)
+        .getCapability<&{NonFungibleToken.CollectionPublic, CaaArts.CollectionPublic}>(CaaArts.CollectionPublicPath)
+        .check()
+}
 
 pub fun hasChainmonstersMarketplace(_ address: Address): Bool {
     return getAccount(address)
@@ -22,6 +40,24 @@ pub fun hasChainmonstersRewards(_ address: Address): Bool {
         .check()
 }
 
+pub fun hasCrave(_ address: Address): Bool {
+    return getAccount(address)
+        .getCapability<&{Crave.CraveCollectionPublic}>(Crave.CollectionPublicPath)
+        .check()
+}
+
+pub fun hasEverbloom(_ address: Address): Bool {
+    return getAccount(address)
+        .getCapability<&{Everbloom.PrintCollectionPublic}>(Everbloom.CollectionPublicPath)
+        .check()
+}
+
+pub fun hasFantastec(_ address: Address): Bool {
+    return getAccount(address)
+        .getCapability<&FantastecNFT.Collection{NonFungibleToken.CollectionPublic, FantastecNFT.FantastecNFTCollectionPublic}>(FantastecNFT.CollectionPublicPath)
+        .check()
+}
+
 pub fun hasFUSD(_ address: Address): Bool {
     let receiver: Bool = getAccount(address)
         .getCapability<&FUSD.Vault{FungibleToken.Receiver}>(/public/fusdReceiver)
@@ -32,9 +68,33 @@ pub fun hasFUSD(_ address: Address): Bool {
     return receiver && balance
 }
 
+pub fun hasJambb(_ address: Address): Bool {
+    return getAccount(address)
+        .getCapability<&{Vouchers.CollectionPublic}>(Vouchers.CollectionPublicPath)
+        .check()
+}
+
+pub fun hasKLKTN(_ address: Address): Bool {
+    return getAccount(address)
+        .getCapability<&KlktnNFT.Collection{NonFungibleToken.CollectionPublic, KlktnNFT.KlktnNFTCollectionPublic}>(KlktnNFT.CollectionPublicPath)
+        .check()
+}
+
 pub fun hasKOTD(_ address: Address): Bool {
     return getAccount(address)
         .getCapability<&{KOTD.NiftoryCollectibleCollectionPublic}>(KOTD.CollectionPublicPath)
+        .check()
+}
+
+pub fun hasMatrixWorldFlowFestNFT(_ address: Address): Bool {
+    return getAccount(address)
+        .getCapability<&MatrixWorldFlowFestNFT.Collection{NonFungibleToken.CollectionPublic, MatrixWorldFlowFestNFT.MatrixWorldFlowFestNFTCollectionPublic}>(MatrixWorldFlowFestNFT.CollectionPublicPath)
+        .check()
+}
+
+pub fun hasMusicBlock(_ address: Address): Bool {
+    return getAccount(address)
+        .getCapability<&MusicBlock.Collection{NonFungibleToken.CollectionPublic, MusicBlock.MusicBlockCollectionPublic}>(MusicBlock.CollectionPublicPath)
         .check()
 }
 
@@ -44,9 +104,33 @@ pub fun hasMynft(_ address: Address): Bool {
         .check()
 }
 
+pub fun hasNyatheesOVO(_ address: Address): Bool {
+    return getAccount(address)
+        .getCapability<&NyatheesOVO.Collection{NonFungibleToken.CollectionPublic, NyatheesOVO.NFTCollectionPublic}>(NyatheesOVO.CollectionPublicPath)
+        .check()
+}
+
+pub fun hasRareRooms(_ address: Address): Bool {
+    return getAccount(address)
+        .getCapability<&RareRooms_NFT.Collection{NonFungibleToken.CollectionPublic, RareRooms_NFT.RareRooms_NFTCollectionPublic}>(RareRooms_NFT.CollectionPublicPath)
+        .check()
+}
+
+pub fun hasRCRDSHPNFT(_ address: Address): Bool {
+    return getAccount(address)
+        .getCapability<&{NonFungibleToken.CollectionPublic}>(RCRDSHPNFT.collectionPublicPath)
+        .check()
+}
+
 pub fun hasShard(_ address: Address): Bool {
     return getAccount(address)
         .getCapability<&{NonFungibleToken.CollectionPublic}>(/public/ShardCollection)
+        .check()
+}
+
+pub fun hasSportsIcon(_ address: Address): Bool {
+    return getAccount(address)
+        .getCapability<&SportsIconCollectible.Collection{NonFungibleToken.CollectionPublic, NonFungibleToken.Receiver, SportsIconCollectible.CollectibleCollectionPublic}>(SportsIconCollectible.CollectionPublicPath)
         .check()
 }
 
@@ -64,12 +148,18 @@ pub fun hasStarlyCardMarket(_ address: Address): Bool {
 
 pub fun hasXtingles(_ address: Address): Bool {
     return getAccount(address)
-        .getCapability<&{Vouchers.CollectionPublic}>(Vouchers.CollectionPublicPath)
+        .getCapability<&{Collectible.CollectionPublic}>(Collectible.CollectionPublicPath)
         .check()
 }
 
 transaction {
     prepare(acct: AuthAccount) {
+        if !hasCaaArts(acct.address) {
+             if acct.borrow<&CaaArts.Collection>(from: CaaArts.CollectionStoragePath) == nil {
+                 acct.save(<-CaaArts.createEmptyCollection(), to: CaaArts.CollectionStoragePath)
+             }
+             acct.link<&{NonFungibleToken.CollectionPublic, CaaArts.CollectionPublic}>(CaaArts.CollectionPublicPath, target: CaaArts.CollectionStoragePath)
+        }
         if !hasChainmonstersMarketplace(acct.address) {
              if acct.borrow<&ChainmonstersMarketplace.Collection>(from: ChainmonstersMarketplace.CollectionStoragePath) == nil {
                  acct.save(<-ChainmonstersMarketplace.createEmptyCollection(), to: ChainmonstersMarketplace.CollectionStoragePath)
@@ -82,6 +172,24 @@ transaction {
              }
              acct.link<&{ChainmonstersRewards.ChainmonstersRewardCollectionPublic}>(/public/ChainmonstersRewardCollection, target: /storage/ChainmonstersRewardCollection)
         }
+        if !hasCrave(acct.address) {
+             if acct.borrow<&Crave.Collection>(from: Crave.CollectionStoragePath) == nil {
+                 acct.save(<-Crave.createEmptyCollection(), to: Crave.CollectionStoragePath)
+             }
+             acct.link<&{Crave.CraveCollectionPublic}>(Crave.CollectionPublicPath, target: Crave.CollectionStoragePath)
+        }
+        if !hasEverbloom(acct.address) {
+             if acct.borrow<&Everbloom.Collection>(from: Everbloom.CollectionStoragePath) == nil {
+                 acct.save(<-Everbloom.createEmptyCollection(), to: Everbloom.CollectionStoragePath)
+             }
+             acct.link<&{Everbloom.PrintCollectionPublic}>(Everbloom.CollectionPublicPath, target: Everbloom.CollectionStoragePath)
+        }
+        if !hasFantastec(acct.address) {
+             if acct.borrow<&FantastecNFT.Collection>(from: FantastecNFT.CollectionStoragePath) == nil {
+                 acct.save(<-FantastecNFT.createEmptyCollection(), to: FantastecNFT.CollectionStoragePath)
+             }
+             acct.link<&FantastecNFT.Collection{NonFungibleToken.CollectionPublic, FantastecNFT.FantastecNFTCollectionPublic}>(FantastecNFT.CollectionPublicPath, target: FantastecNFT.CollectionStoragePath)
+        }
         if !hasFUSD(acct.address) {
             if acct.borrow<&FUSD.Vault>(from: /storage/fusdVault) == nil {
                 acct.save(<-FUSD.createEmptyVault(), to: /storage/fusdVault)
@@ -89,11 +197,35 @@ transaction {
             acct.link<&FUSD.Vault{FungibleToken.Receiver}>(/public/fusdReceiver, target: /storage/fusdVault)
             acct.link<&FUSD.Vault{FungibleToken.Balance}>(/public/fusdBalance, target: /storage/fusdVault)
         }
+        if !hasJambb(acct.address) {
+             if acct.borrow<&Vouchers.Collection>(from: Vouchers.CollectionStoragePath) == nil {
+                 acct.save(<-Vouchers.createEmptyCollection(), to: Vouchers.CollectionStoragePath)
+             }
+             acct.link<&{Vouchers.CollectionPublic}>(Vouchers.CollectionPublicPath, target: Vouchers.CollectionStoragePath)
+        }
+        if !hasKLKTN(acct.address) {
+             if acct.borrow<&KlktnNFT.Collection>(from: KlktnNFT.CollectionStoragePath) == nil {
+                 acct.save(<-KlktnNFT.createEmptyCollection(), to: KlktnNFT.CollectionStoragePath)
+             }
+             acct.link<&KlktnNFT.Collection{NonFungibleToken.CollectionPublic, KlktnNFT.KlktnNFTCollectionPublic}>(KlktnNFT.CollectionPublicPath, target: KlktnNFT.CollectionStoragePath)
+        }
         if !hasKOTD(acct.address) {
              if acct.borrow<&KOTD.Collection>(from: KOTD.CollectionStoragePath) == nil {
                  acct.save(<-KOTD.createEmptyCollection(), to: KOTD.CollectionStoragePath)
              }
              acct.link<&{KOTD.NiftoryCollectibleCollectionPublic}>(KOTD.CollectionPublicPath, target: KOTD.CollectionStoragePath)
+        }
+        if !hasMatrixWorldFlowFestNFT(acct.address) {
+             if acct.borrow<&MatrixWorldFlowFestNFT.Collection>(from: MatrixWorldFlowFestNFT.CollectionStoragePath) == nil {
+                 acct.save(<-MatrixWorldFlowFestNFT.createEmptyCollection(), to: MatrixWorldFlowFestNFT.CollectionStoragePath)
+             }
+             acct.link<&MatrixWorldFlowFestNFT.Collection{NonFungibleToken.CollectionPublic, MatrixWorldFlowFestNFT.MatrixWorldFlowFestNFTCollectionPublic}>(MatrixWorldFlowFestNFT.CollectionPublicPath, target: MatrixWorldFlowFestNFT.CollectionStoragePath)
+        }
+        if !hasMusicBlock(acct.address) {
+             if acct.borrow<&MusicBlock.Collection>(from: MusicBlock.CollectionStoragePath) == nil {
+                 acct.save(<-MusicBlock.createEmptyCollection(), to: MusicBlock.CollectionStoragePath)
+             }
+             acct.link<&MusicBlock.Collection{NonFungibleToken.CollectionPublic, MusicBlock.MusicBlockCollectionPublic}>(MusicBlock.CollectionPublicPath, target: MusicBlock.CollectionStoragePath)
         }
         if !hasMynft(acct.address) {
              if acct.borrow<&Mynft.Collection>(from: Mynft.CollectionStoragePath) == nil {
@@ -101,11 +233,35 @@ transaction {
              }
              acct.link<&Mynft.Collection{NonFungibleToken.CollectionPublic, Mynft.MynftCollectionPublic}>(Mynft.CollectionPublicPath, target: Mynft.CollectionStoragePath)
         }
+        if !hasNyatheesOVO(acct.address) {
+             if acct.borrow<&NyatheesOVO.Collection>(from: NyatheesOVO.CollectionStoragePath) == nil {
+                 acct.save(<-NyatheesOVO.createEmptyCollection(), to: NyatheesOVO.CollectionStoragePath)
+             }
+             acct.link<&NyatheesOVO.Collection{NonFungibleToken.CollectionPublic, NyatheesOVO.NFTCollectionPublic}>(NyatheesOVO.CollectionPublicPath, target: NyatheesOVO.CollectionStoragePath)
+        }
+        if !hasRareRooms(acct.address) {
+             if acct.borrow<&RareRooms_NFT.Collection>(from: RareRooms_NFT.CollectionStoragePath) == nil {
+                 acct.save(<-RareRooms_NFT.createEmptyCollection(), to: RareRooms_NFT.CollectionStoragePath)
+             }
+             acct.link<&RareRooms_NFT.Collection{NonFungibleToken.CollectionPublic, RareRooms_NFT.RareRooms_NFTCollectionPublic}>(RareRooms_NFT.CollectionPublicPath, target: RareRooms_NFT.CollectionStoragePath)
+        }
+        if !hasRCRDSHPNFT(acct.address) {
+             if acct.borrow<&RCRDSHPNFT.Collection>(from: RCRDSHPNFT.collectionStoragePath) == nil {
+                 acct.save(<-RCRDSHPNFT.createEmptyCollection(), to: RCRDSHPNFT.collectionStoragePath)
+             }
+             acct.link<&{NonFungibleToken.CollectionPublic}>(RCRDSHPNFT.collectionPublicPath, target: RCRDSHPNFT.collectionStoragePath)
+        }
         if !hasShard(acct.address) {
              if acct.borrow<&Shard.Collection>(from: /storage/ShardCollection) == nil {
                  acct.save(<-Shard.createEmptyCollection(), to: /storage/ShardCollection)
              }
              acct.link<&{NonFungibleToken.CollectionPublic}>(/public/ShardCollection, target: /storage/ShardCollection)
+        }
+        if !hasSportsIcon(acct.address) {
+             if acct.borrow<&SportsIconCollectible.Collection>(from: SportsIconCollectible.CollectionStoragePath) == nil {
+                 acct.save(<-SportsIconCollectible.createEmptyCollection(), to: SportsIconCollectible.CollectionStoragePath)
+             }
+             acct.link<&SportsIconCollectible.Collection{NonFungibleToken.CollectionPublic, NonFungibleToken.Receiver, SportsIconCollectible.CollectibleCollectionPublic}>(SportsIconCollectible.CollectionPublicPath, target: SportsIconCollectible.CollectionStoragePath)
         }
         if !hasStarlyCard(acct.address) {
             if acct.borrow<&StarlyCard.Collection>(from: StarlyCard.CollectionStoragePath) == nil {
@@ -117,13 +273,13 @@ transaction {
              if acct.borrow<&StarlyCardMarket.Collection>(from: StarlyCardMarket.CollectionStoragePath) == nil {
                  acct.save(<-StarlyCardMarket.createEmptyCollection(), to: StarlyCardMarket.CollectionStoragePath)
              }
-             acct.link<&StarlyCardMarket.Collection{StarlyCardMarket.CollectionPublic}>(StarlyCardMarket.CollectionPublicPath, target:StarlyCardMarket.CollectionStoragePath)
+             acct.link<&StarlyCardMarket.Collection{StarlyCardMarket.CollectionPublic}>(StarlyCardMarket.CollectionPublicPath, target: StarlyCardMarket.CollectionStoragePath)
         }
         if !hasXtingles(acct.address) {
-             if acct.borrow<&Vouchers.Collection>(from: Vouchers.CollectionStoragePath) == nil {
-                 acct.save(<-Vouchers.createEmptyCollection(), to: Vouchers.CollectionStoragePath)
+             if acct.borrow<&Collectible.Collection>(from: Collectible.CollectionStoragePath) == nil {
+                 acct.save(<-Collectible.createEmptyCollection(), to: Collectible.CollectionStoragePath)
              }
-             acct.link<&{Vouchers.CollectionPublic}>(Vouchers.CollectionPublicPath, target: Vouchers.CollectionStoragePath)
+             acct.link<&{Collectible.CollectionPublic}>(Collectible.CollectionPublicPath, target: Collectible.CollectionStoragePath)
         }
     }
 }

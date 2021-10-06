@@ -11,6 +11,7 @@
 
 | Contract                 | Testnet            | Mainnet            |
 | ------------------------ | ------------------ | ------------------ |
+| Beam                     | 0x6085ae87e78e1433 | 0x86b4a0010a71cfc3 |
 | CaaArts                  | 0x40f8432d29f27695 | 0x98c9c2e548b84d31 |
 | ChainmonstersMarketplace | 0x75783e3c937304a8 | 0x64f83c60989ce555 |
 | ChainmonstersRewards     | 0x75783e3c937304a8 | 0x93615d25d14fa337 |
@@ -23,7 +24,7 @@
 | FlowToken                | 0x7e60df042a9c0868 | 0x1654653399040a61 |
 | FungibleToken            | 0x9a0766d93b6608b7 | 0xf233dcee88fe0abe |
 | KLKTN                    | 0x336895dbe44c4b44 | 0xabd6e80be7e9682c |
-| KOTD                     | 0x23dddd854fcc8c6f | 0x6085ae87e78e1433 |
+| KOTD                     | 0x6085ae87e78e1433 | 0x23dddd854fcc8c6f |
 | MatrixWorldFlowFestNFT   | 0xe2f1b000e0203c1d | 0x2d2750f240198f91 |
 | MusicBlock (Melos)       | 0xeb3241ad7d7881db | 0x3b73da28c2a82eef |
 | Mynft                    | 0x1eced429f2012ef0 | 0xf6fcbef550d97aa5 |

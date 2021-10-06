@@ -6,6 +6,13 @@
     }
   },
   "contracts": {
+    "Beam": {
+      "source": "./contracts/Beam.cdc",
+      "aliases": {
+        "testnet": "0x6085ae87e78e1433",
+        "mainnet": "0x86b4a0010a71cfc3"
+      }
+    },
     "CaaArts": {
       "source": "./contracts/CaaArts.cdc",
       "aliases": {
@@ -135,7 +142,8 @@
     "NonFungibleToken": {
       "source": "./contracts/NonFungibleToken.cdc",
       "aliases": {
-        "testnet": "0x631e88ae7f1d7c20"
+        "testnet": "0x631e88ae7f1d7c20",
+        "mainnet": "0x1d7e57aa55817448"
       }
     },
     "NyatheesOVO": {
@@ -161,7 +169,8 @@
     "Shard": {
       "source": "./contracts/Shard.cdc",
       "aliases": {
-        "testnet": "0x462b4dac28de23f3"
+        "testnet": "0x462b4dac28de23f3",
+        "mainnet": "0x82b54037a8f180cf"
       }
     },
     "SportsIconBeneficiaries": {
@@ -242,6 +251,7 @@
   "deployments": {
     "emulator": {
       "emulator-account": [
+        "Beam",
         "CaaArts",
         "ChainmonstersMarketplace",
         "ChainmonstersRewards",

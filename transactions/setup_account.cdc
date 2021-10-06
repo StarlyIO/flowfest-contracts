@@ -1,3 +1,4 @@
+import Beam from "../contracts/Beam.cdc"
 import CaaArts from "../contracts/CaaArts.cdc"
 import ChainmonstersMarketplace from "../contracts/ChainmonstersMarketplace.cdc"
 import ChainmonstersRewards from "../contracts/ChainmonstersRewards.cdc"
@@ -21,6 +22,12 @@ import SportsIconCollectible from "../contracts/SportsIconCollectible.cdc"
 import StarlyCard from "../contracts/StarlyCard.cdc"
 import StarlyCardMarket from "../contracts/StarlyCardMarket.cdc"
 import Vouchers from "../contracts/Vouchers.cdc"
+
+pub fun hasBeam(_ address: Address): Bool {
+    return getAccount(address)
+        .getCapability<&{Beam.BeamCollectionPublic}>(Beam.CollectionPublicPath)
+        .check()
+}
 
 pub fun hasCaaArts(_ address: Address): Bool {
     return getAccount(address)
@@ -154,6 +161,12 @@ pub fun hasXtingles(_ address: Address): Bool {
 
 transaction {
     prepare(acct: AuthAccount) {
+        if !hasBeam(acct.address) {
+             if acct.borrow<&Beam.Collection>(from: Beam.CollectionStoragePath) == nil {
+                 acct.save(<-Beam.createEmptyCollection(), to: Beam.CollectionStoragePath)
+             }
+             acct.link<&{Beam.BeamCollectionPublic}>(Beam.CollectionPublicPath, target: Beam.CollectionStoragePath)
+        }
         if !hasCaaArts(acct.address) {
              if acct.borrow<&CaaArts.Collection>(from: CaaArts.CollectionStoragePath) == nil {
                  acct.save(<-CaaArts.createEmptyCollection(), to: CaaArts.CollectionStoragePath)

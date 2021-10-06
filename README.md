@@ -13,7 +13,7 @@
 | ------------------------ | ------------------ | ------------------ |
 | Beam                     | 0x6085ae87e78e1433 | 0x86b4a0010a71cfc3 |
 | BlockleteGames_NFT       | TBD                | 0x329feb3ab062d289 |
-| CaaArts                  | 0x40f8432d29f27695 | 0x98c9c2e548b84d31 |
+| CaaArts                  | 0xa8b1239250f8d342 | 0x98c9c2e548b84d31 |
 | ChainmonstersMarketplace | 0x75783e3c937304a8 | 0x64f83c60989ce555 |
 | ChainmonstersRewards     | 0x75783e3c937304a8 | 0x93615d25d14fa337 |
 | Collectible (Xtingles)   | 0x85080f371da20cc1 | 0xf5b0eb433389ac3f |

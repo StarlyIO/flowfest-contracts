@@ -22,7 +22,7 @@
     "CaaArts": {
       "source": "./contracts/CaaArts.cdc",
       "aliases": {
-        "testnet": "0x40f8432d29f27695",
+        "testnet": "0xa8b1239250f8d342",
         "mainnet": "0x98c9c2e548b84d31"
       }
     },

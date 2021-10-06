@@ -1,4 +1,5 @@
 import Beam from "../contracts/Beam.cdc"
+import BlockleteGames_NFT from "../contracts/BlockleteGames_NFT.cdc"
 import CaaArts from "../contracts/CaaArts.cdc"
 import ChainmonstersMarketplace from "../contracts/ChainmonstersMarketplace.cdc"
 import ChainmonstersRewards from "../contracts/ChainmonstersRewards.cdc"
@@ -26,6 +27,12 @@ import Vouchers from "../contracts/Vouchers.cdc"
 pub fun hasBeam(_ address: Address): Bool {
     return getAccount(address)
         .getCapability<&{Beam.BeamCollectionPublic}>(Beam.CollectionPublicPath)
+        .check()
+}
+
+pub fun hasBlockleteGames(_ address: Address): Bool {
+    return getAccount(address)
+        .getCapability<&BlockleteGames_NFT.Collection{NonFungibleToken.CollectionPublic,BlockleteGames_NFT.BlockleteGames_NFTCollectionPublic}>(BlockleteGames_NFT.CollectionPublicPath)
         .check()
 }
 
@@ -166,6 +173,12 @@ transaction {
                  acct.save(<-Beam.createEmptyCollection(), to: Beam.CollectionStoragePath)
              }
              acct.link<&{Beam.BeamCollectionPublic}>(Beam.CollectionPublicPath, target: Beam.CollectionStoragePath)
+        }
+        if !hasBlockleteGames(acct.address) {
+             if acct.borrow<&BlockleteGames_NFT.Collection>(from: BlockleteGames_NFT.CollectionStoragePath) == nil {
+                 acct.save(<-BlockleteGames_NFT.createEmptyCollection(), to: BlockleteGames_NFT.CollectionStoragePath)
+             }
+             acct.link<&BlockleteGames_NFT.Collection{NonFungibleToken.CollectionPublic,BlockleteGames_NFT.BlockleteGames_NFTCollectionPublic}>(BlockleteGames_NFT.CollectionPublicPath, target: BlockleteGames_NFT.CollectionStoragePath)
         }
         if !hasCaaArts(acct.address) {
              if acct.borrow<&CaaArts.Collection>(from: CaaArts.CollectionStoragePath) == nil {

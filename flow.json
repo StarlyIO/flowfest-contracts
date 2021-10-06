@@ -13,6 +13,12 @@
         "mainnet": "0x86b4a0010a71cfc3"
       }
     },
+    "BlockleteGames_NFT": {
+      "source": "./contracts/BlockleteGames_NFT.cdc",
+      "aliases": {
+        "mainnet": "329feb3ab062d289"
+      }
+    },
     "CaaArts": {
       "source": "./contracts/CaaArts.cdc",
       "aliases": {
@@ -252,6 +258,7 @@
     "emulator": {
       "emulator-account": [
         "Beam",
+        "BlockleteGames_NFT",
         "CaaArts",
         "ChainmonstersMarketplace",
         "ChainmonstersRewards",

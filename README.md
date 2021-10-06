@@ -12,6 +12,7 @@
 | Contract                 | Testnet            | Mainnet            |
 | ------------------------ | ------------------ | ------------------ |
 | Beam                     | 0x6085ae87e78e1433 | 0x86b4a0010a71cfc3 |
+| BlockleteGames_NFT       | TBD                | 0x329feb3ab062d289 |
 | CaaArts                  | 0x40f8432d29f27695 | 0x98c9c2e548b84d31 |
 | ChainmonstersMarketplace | 0x75783e3c937304a8 | 0x64f83c60989ce555 |
 | ChainmonstersRewards     | 0x75783e3c937304a8 | 0x93615d25d14fa337 |

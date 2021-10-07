@@ -1,7 +1,6 @@
 import Beam from "../contracts/Beam.cdc"
 import CaaArts from "../contracts/CaaArts.cdc"
 import CaaPass from "../contracts/CaaPass.cdc"
-import ChainmonstersMarketplace from "../contracts/ChainmonstersMarketplace.cdc"
 import ChainmonstersRewards from "../contracts/ChainmonstersRewards.cdc"
 import Collectible from "../contracts/Collectible.cdc"
 import Crave from "../contracts/Crave.cdc"
@@ -18,7 +17,6 @@ import NonFungibleToken from "../contracts/NonFungibleToken.cdc"
 import Shard from "../contracts/Shard.cdc"
 import SportsIconCollectible from "../contracts/SportsIconCollectible.cdc"
 import StarlyCard from "../contracts/StarlyCard.cdc"
-import StarlyCardMarket from "../contracts/StarlyCardMarket.cdc"
 import TuneGO from "../contracts/TuneGO.cdc"
 import Vouchers from "../contracts/Vouchers.cdc"
 
@@ -30,11 +28,6 @@ pub fun main(address: Address): {String: Int} {
                 .borrow<&{Beam.BeamCollectionPublic}>()
                 ?? panic("Could not borrow capability from public collection")
     ret["Beam"] = beamCollectionRef.getIDs().length;
-
-    let caaArtsCollectionRef = account.getCapability(CaaArts.CollectionPublicPath)!
-                .borrow<&{NonFungibleToken.CollectionPublic}>()
-                ?? panic("Could not borrow capability from public collection")
-    ret["CaaArts"] = caaArtsCollectionRef.getIDs().length;
 
     let caaPassCollectionRef = account.getCapability(CaaPass.CollectionPublicPath)!
                 .borrow<&{NonFungibleToken.CollectionPublic}>()

@@ -1,8 +1,6 @@
 import Beam from "../contracts/Beam.cdc"
 import BlockleteGames_NFT from "../contracts/BlockleteGames_NFT.cdc"
-import CaaArts from "../contracts/CaaArts.cdc"
 import CaaPass from "../contracts/CaaPass.cdc"
-import ChainmonstersMarketplace from "../contracts/ChainmonstersMarketplace.cdc"
 import ChainmonstersRewards from "../contracts/ChainmonstersRewards.cdc"
 import Collectible from "../contracts/Collectible.cdc"
 import Crave from "../contracts/Crave.cdc"
@@ -24,7 +22,6 @@ import RCRDSHPNFT from "../contracts/RCRDSHPNFT.cdc"
 import Shard from "../contracts/Shard.cdc"
 import SportsIconCollectible from "../contracts/SportsIconCollectible.cdc"
 import StarlyCard from "../contracts/StarlyCard.cdc"
-import StarlyCardMarket from "../contracts/StarlyCardMarket.cdc"
 import TuneGO from "../contracts/TuneGO.cdc"
 import Vouchers from "../contracts/Vouchers.cdc"
 
@@ -40,21 +37,9 @@ pub fun hasBlockleteGames(_ address: Address): Bool {
         .check()
 }
 
-pub fun hasCaaArts(_ address: Address): Bool {
-    return getAccount(address)
-        .getCapability<&{NonFungibleToken.CollectionPublic, CaaArts.CollectionPublic}>(CaaArts.CollectionPublicPath)
-        .check()
-}
-
 pub fun hasCaaPass(_ address: Address): Bool {
     return getAccount(address)
         .getCapability<&{NonFungibleToken.CollectionPublic, CaaPass.CollectionPublic}>(CaaPass.CollectionPublicPath)
-        .check()
-}
-
-pub fun hasChainmonstersMarketplace(_ address: Address): Bool {
-    return getAccount(address)
-        .getCapability<&ChainmonstersMarketplace.Collection{ChainmonstersMarketplace.CollectionPublic}>(ChainmonstersMarketplace.CollectionPublicPath)
         .check()
 }
 
@@ -176,12 +161,6 @@ pub fun hasStarlyCard(_ address: Address): Bool {
         .check()
 }
 
-pub fun hasStarlyCardMarket(_ address: Address): Bool {
-    return getAccount(address)
-        .getCapability<&StarlyCardMarket.Collection{StarlyCardMarket.CollectionPublic}>(StarlyCardMarket.CollectionPublicPath)
-        .check()
-}
-
 pub fun hasTuneGO(_ address: Address): Bool {
     return getAccount(address)
         .getCapability<&{TuneGO.TuneGOCollectionPublic}>(TuneGO.CollectionPublicPath)
@@ -198,9 +177,7 @@ pub fun main(address: Address): {String: Bool} {
     let ret: {String: Bool} = {}
     ret["Beam"] = hasBeam(address)
     ret["BlockleteGames"] = hasBlockleteGames(address)
-    ret["CaaArts"] = hasCaaArts(address)
     ret["CaaPass"] = hasCaaPass(address)
-    ret["ChainmonstersMarketplace"] = hasChainmonstersMarketplace(address)
     ret["ChainmonstersRewards"] = hasChainmonstersRewards(address)
     ret["Crave"] = hasCrave(address)
     ret["Everbloom"] = hasEverbloom(address)
@@ -220,7 +197,6 @@ pub fun main(address: Address): {String: Bool} {
     ret["Shard"] = hasShard(address)
     ret["SportsIcon"] = hasSportsIcon(address)
     ret["StarlyCard"] = hasStarlyCard(address)
-    ret["StarlyCardMarket"] = hasStarlyCardMarket(address)
     ret["TuneGO"] = hasTuneGO(address)
     ret["Xtingles"] = hasXtingles(address)
     return ret

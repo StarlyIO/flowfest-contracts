@@ -1,8 +1,6 @@
 import Beam from "../contracts/Beam.cdc"
 import BlockleteGames_NFT from "../contracts/BlockleteGames_NFT.cdc"
-import CaaArts from "../contracts/CaaArts.cdc"
 import CaaPass from "../contracts/CaaPass.cdc"
-import ChainmonstersMarketplace from "../contracts/ChainmonstersMarketplace.cdc"
 import ChainmonstersRewards from "../contracts/ChainmonstersRewards.cdc"
 import Collectible from "../contracts/Collectible.cdc"
 import Crave from "../contracts/Crave.cdc"
@@ -24,7 +22,6 @@ import RCRDSHPNFT from "../contracts/RCRDSHPNFT.cdc"
 import Shard from "../contracts/Shard.cdc"
 import SportsIconCollectible from "../contracts/SportsIconCollectible.cdc"
 import StarlyCard from "../contracts/StarlyCard.cdc"
-import StarlyCardMarket from "../contracts/StarlyCardMarket.cdc"
 import TuneGO from "../contracts/TuneGO.cdc"
 import Vouchers from "../contracts/Vouchers.cdc"
 
@@ -40,21 +37,9 @@ pub fun hasBlockleteGames(_ address: Address): Bool {
         .check()
 }
 
-pub fun hasCaaArts(_ address: Address): Bool {
-    return getAccount(address)
-        .getCapability<&{NonFungibleToken.CollectionPublic, CaaArts.CollectionPublic}>(CaaArts.CollectionPublicPath)
-        .check()
-}
-
 pub fun hasCaaPass(_ address: Address): Bool {
     return getAccount(address)
         .getCapability<&{NonFungibleToken.CollectionPublic, CaaPass.CollectionPublic}>(CaaPass.CollectionPublicPath)
-        .check()
-}
-
-pub fun hasChainmonstersMarketplace(_ address: Address): Bool {
-    return getAccount(address)
-        .getCapability<&ChainmonstersMarketplace.Collection{ChainmonstersMarketplace.CollectionPublic}>(ChainmonstersMarketplace.CollectionPublicPath)
         .check()
 }
 
@@ -176,12 +161,6 @@ pub fun hasStarlyCard(_ address: Address): Bool {
         .check()
 }
 
-pub fun hasStarlyCardMarket(_ address: Address): Bool {
-    return getAccount(address)
-        .getCapability<&StarlyCardMarket.Collection{StarlyCardMarket.CollectionPublic}>(StarlyCardMarket.CollectionPublicPath)
-        .check()
-}
-
 pub fun hasTuneGO(_ address: Address): Bool {
     return getAccount(address)
         .getCapability<&{TuneGO.TuneGOCollectionPublic}>(TuneGO.CollectionPublicPath)
@@ -208,23 +187,11 @@ transaction {
              }
              acct.link<&BlockleteGames_NFT.Collection{NonFungibleToken.CollectionPublic,BlockleteGames_NFT.BlockleteGames_NFTCollectionPublic}>(BlockleteGames_NFT.CollectionPublicPath, target: BlockleteGames_NFT.CollectionStoragePath)
         }
-        if !hasCaaArts(acct.address) {
-             if acct.borrow<&CaaArts.Collection>(from: CaaArts.CollectionStoragePath) == nil {
-                 acct.save(<-CaaArts.createEmptyCollection(), to: CaaArts.CollectionStoragePath)
-             }
-             acct.link<&{NonFungibleToken.CollectionPublic, CaaArts.CollectionPublic}>(CaaArts.CollectionPublicPath, target: CaaArts.CollectionStoragePath)
-        }
         if !hasCaaPass(acct.address) {
              if acct.borrow<&CaaPass.Collection>(from: CaaPass.CollectionStoragePath) == nil {
                  acct.save(<-CaaPass.createEmptyCollection(), to: CaaPass.CollectionStoragePath)
              }
              acct.link<&{NonFungibleToken.CollectionPublic, CaaPass.CollectionPublic}>(CaaPass.CollectionPublicPath, target: CaaPass.CollectionStoragePath)
-        }
-        if !hasChainmonstersMarketplace(acct.address) {
-             if acct.borrow<&ChainmonstersMarketplace.Collection>(from: ChainmonstersMarketplace.CollectionStoragePath) == nil {
-                 acct.save(<-ChainmonstersMarketplace.createEmptyCollection(), to: ChainmonstersMarketplace.CollectionStoragePath)
-             }
-             acct.link<&ChainmonstersMarketplace.Collection{ChainmonstersMarketplace.CollectionPublic}>(ChainmonstersMarketplace.CollectionPublicPath, target: ChainmonstersMarketplace.CollectionStoragePath)
         }
         if !hasChainmonstersRewards(acct.address) {
              if acct.borrow<&ChainmonstersRewards.Collection>(from: /storage/ChainmonstersRewardCollection) == nil {
@@ -340,12 +307,6 @@ transaction {
                 acct.save(<-StarlyCard.createEmptyCollection(), to: StarlyCard.CollectionStoragePath)
             }
             acct.link<&StarlyCard.Collection{NonFungibleToken.CollectionPublic, StarlyCard.StarlyCardCollectionPublic}>(StarlyCard.CollectionPublicPath, target: StarlyCard.CollectionStoragePath)
-        }
-        if !hasStarlyCardMarket(acct.address) {
-             if acct.borrow<&StarlyCardMarket.Collection>(from: StarlyCardMarket.CollectionStoragePath) == nil {
-                 acct.save(<-StarlyCardMarket.createEmptyCollection(), to: StarlyCardMarket.CollectionStoragePath)
-             }
-             acct.link<&StarlyCardMarket.Collection{StarlyCardMarket.CollectionPublic}>(StarlyCardMarket.CollectionPublicPath, target: StarlyCardMarket.CollectionStoragePath)
         }
         if !hasTuneGO(acct.address) {
              if acct.borrow<&TuneGO.Collection>(from: TuneGO.CollectionStoragePath) == nil {

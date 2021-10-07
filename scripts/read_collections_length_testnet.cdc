@@ -19,6 +19,7 @@ import Shard from "../contracts/Shard.cdc"
 import SportsIconCollectible from "../contracts/SportsIconCollectible.cdc"
 import StarlyCard from "../contracts/StarlyCard.cdc"
 import StarlyCardMarket from "../contracts/StarlyCardMarket.cdc"
+import TuneGO from "../contracts/TuneGO.cdc"
 import Vouchers from "../contracts/Vouchers.cdc"
 
 pub fun main(address: Address): {String: Int} {
@@ -104,6 +105,11 @@ pub fun main(address: Address): {String: Int} {
             .borrow<&{NonFungibleToken.CollectionPublic}>()
             ?? panic("Could not borrow capability from public collection")
     ret["Starly"] = starlyCollectionRef.getIDs().length;
+
+    let tuneGoCollectionRef = account.getCapability(TuneGO.CollectionPublicPath)!
+            .borrow<&{TuneGO.TuneGOCollectionPublic}>()
+            ?? panic("Could not borrow capability from public collection")
+    ret["TuneGO"] = tuneGoCollectionRef.getIDs().length;
 
     let xtinglesCollectionRef = account.getCapability(Collectible.CollectionPublicPath)!
             .borrow<&{Collectible.CollectionPublic}>()

@@ -230,6 +230,13 @@
         "mainnet": "0x5b82f21c0edf76e3"
       }
     },
+    "TuneGO": {
+      "source": "./contracts/TuneGO.cdc",
+      "aliases": {
+        "testnet": "0x2b0150231c047a8c",
+        "mainnet": "0x0d9bc5af3fc0c2e3"
+      }
+    },
     "Vouchers": {
       "source": "./contracts/Vouchers.cdc",
       "aliases": {
@@ -302,6 +309,7 @@
         "SportsIconCounter",
         "StarlyCard",
         "StarlyCardMarket",
+        "TuneGO",
         "Vouchers"
       ]
     }

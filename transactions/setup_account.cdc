@@ -24,6 +24,7 @@ import Shard from "../contracts/Shard.cdc"
 import SportsIconCollectible from "../contracts/SportsIconCollectible.cdc"
 import StarlyCard from "../contracts/StarlyCard.cdc"
 import StarlyCardMarket from "../contracts/StarlyCardMarket.cdc"
+import TuneGO from "../contracts/TuneGO.cdc"
 import Vouchers from "../contracts/Vouchers.cdc"
 
 pub fun hasBeam(_ address: Address): Bool {
@@ -171,6 +172,12 @@ pub fun hasStarlyCard(_ address: Address): Bool {
 pub fun hasStarlyCardMarket(_ address: Address): Bool {
     return getAccount(address)
         .getCapability<&StarlyCardMarket.Collection{StarlyCardMarket.CollectionPublic}>(StarlyCardMarket.CollectionPublicPath)
+        .check()
+}
+
+pub fun hasTuneGO(_ address: Address): Bool {
+    return getAccount(address)
+        .getCapability<&{TuneGO.TuneGOCollectionPublic}>(TuneGO.CollectionPublicPath)
         .check()
 }
 
@@ -326,6 +333,12 @@ transaction {
                  acct.save(<-StarlyCardMarket.createEmptyCollection(), to: StarlyCardMarket.CollectionStoragePath)
              }
              acct.link<&StarlyCardMarket.Collection{StarlyCardMarket.CollectionPublic}>(StarlyCardMarket.CollectionPublicPath, target: StarlyCardMarket.CollectionStoragePath)
+        }
+        if !hasTuneGO(acct.address) {
+             if acct.borrow<&TuneGO.Collection>(from: TuneGO.CollectionStoragePath) == nil {
+                 acct.save(<-TuneGO.createEmptyCollection(), to: TuneGO.CollectionStoragePath)
+             }
+             acct.link<&{TuneGO.TuneGOCollectionPublic}>(TuneGO.CollectionPublicPath, target: TuneGO.CollectionStoragePath)
         }
         if !hasXtingles(acct.address) {
              if acct.borrow<&Collectible.Collection>(from: Collectible.CollectionStoragePath) == nil {

@@ -24,6 +24,7 @@ import Shard from "../contracts/Shard.cdc"
 import SportsIconCollectible from "../contracts/SportsIconCollectible.cdc"
 import StarlyCard from "../contracts/StarlyCard.cdc"
 import StarlyCardMarket from "../contracts/StarlyCardMarket.cdc"
+import TuneGO from "../contracts/TuneGO.cdc"
 import Vouchers from "../contracts/Vouchers.cdc"
 
 pub fun hasBeam(_ address: Address): Bool {
@@ -174,6 +175,12 @@ pub fun hasStarlyCardMarket(_ address: Address): Bool {
         .check()
 }
 
+pub fun hasTuneGO(_ address: Address): Bool {
+    return getAccount(address)
+        .getCapability<&{TuneGO.TuneGOCollectionPublic}>(TuneGO.CollectionPublicPath)
+        .check()
+}
+
 pub fun hasXtingles(_ address: Address): Bool {
     return getAccount(address)
         .getCapability<&{Collectible.CollectionPublic}>(Collectible.CollectionPublicPath)
@@ -206,6 +213,7 @@ pub fun main(address: Address): {String: Bool} {
     ret["SportsIcon"] = hasSportsIcon(address)
     ret["StarlyCard"] = hasStarlyCard(address)
     ret["StarlyCardMarket"] = hasStarlyCardMarket(address)
+    ret["TuneGO"] = hasTuneGO(address)
     ret["Xtingles"] = hasXtingles(address)
     return ret
 }

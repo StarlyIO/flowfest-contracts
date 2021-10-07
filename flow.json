@@ -233,7 +233,7 @@
     "Vouchers": {
       "source": "./contracts/Vouchers.cdc",
       "aliases": {
-        "testnet": "0xc19f2afbef1070d2",
+        "testnet": "0xe94a6e229293f196",
         "mainnet": "0x444f5ea22c6ea12c"
       }
     }

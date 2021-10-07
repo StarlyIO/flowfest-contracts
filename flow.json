@@ -26,6 +26,13 @@
         "mainnet": "0x98c9c2e548b84d31"
       }
     },
+    "CaaPass": {
+      "source": "./contracts/CaaPass.cdc",
+      "aliases": {
+        "testnet": "0xa8b1239250f8d342",
+        "mainnet": "0x98c9c2e548b84d31"
+      }
+    },
     "ChainmonstersMarketplace": {
       "source": "./contracts/ChainmonstersMarketplace.cdc",
       "aliases": {
@@ -71,13 +78,15 @@
     "FantastecNFT": {
       "source": "./contracts/FantastecNFT.cdc",
       "aliases": {
-        "testnet": "0x7b4fab78fbddc57e"
+        "testnet": "0x7b4fab78fbddc57e",
+        "mainnet": "0x2e1ee1e7a96826ce"
       }
     },
     "FantastecSwapData": {
       "source": "./contracts/FantastecSwapData.cdc",
       "aliases": {
-        "testnet": "0x7b4fab78fbddc57e"
+        "testnet": "0x7b4fab78fbddc57e",
+        "mainnet": "0x2e1ee1e7a96826ce"
       }
     },
     "FlowStorageFees": {
@@ -113,7 +122,8 @@
     "Gaia": {
       "source": "./contracts/Gaia.cdc",
       "aliases": {
-        "testnet": "0xc523a8bbf10fc4a3"
+        "testnet": "0xc523a8bbf10fc4a3",
+        "mainnet": "0x8b148183c28ff88f"
       }
     },
     "KlktnNFT": {
@@ -266,6 +276,7 @@
         "Beam",
         "BlockleteGames_NFT",
         "CaaArts",
+        "CaaPass",
         "ChainmonstersMarketplace",
         "ChainmonstersRewards",
         "Collectible",

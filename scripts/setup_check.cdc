@@ -1,6 +1,7 @@
 import Beam from "../contracts/Beam.cdc"
 import BlockleteGames_NFT from "../contracts/BlockleteGames_NFT.cdc"
 import CaaArts from "../contracts/CaaArts.cdc"
+import CaaPass from "../contracts/CaaPass.cdc"
 import ChainmonstersMarketplace from "../contracts/ChainmonstersMarketplace.cdc"
 import ChainmonstersRewards from "../contracts/ChainmonstersRewards.cdc"
 import Collectible from "../contracts/Collectible.cdc"
@@ -40,6 +41,12 @@ pub fun hasBlockleteGames(_ address: Address): Bool {
 pub fun hasCaaArts(_ address: Address): Bool {
     return getAccount(address)
         .getCapability<&{NonFungibleToken.CollectionPublic, CaaArts.CollectionPublic}>(CaaArts.CollectionPublicPath)
+        .check()
+}
+
+pub fun hasCaaPass(_ address: Address): Bool {
+    return getAccount(address)
+        .getCapability<&{NonFungibleToken.CollectionPublic, CaaPass.CollectionPublic}>(CaaPass.CollectionPublicPath)
         .check()
 }
 
@@ -178,6 +185,7 @@ pub fun main(address: Address): {String: Bool} {
     ret["Beam"] = hasBeam(address)
     ret["BlockleteGames"] = hasBlockleteGames(address)
     ret["CaaArts"] = hasCaaArts(address)
+    ret["CaaPass"] = hasCaaPass(address)
     ret["ChainmonstersMarketplace"] = hasChainmonstersMarketplace(address)
     ret["ChainmonstersRewards"] = hasChainmonstersRewards(address)
     ret["Crave"] = hasCrave(address)

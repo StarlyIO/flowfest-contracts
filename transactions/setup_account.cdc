@@ -1,6 +1,7 @@
 import Beam from "../contracts/Beam.cdc"
 import BlockleteGames_NFT from "../contracts/BlockleteGames_NFT.cdc"
 import CaaArts from "../contracts/CaaArts.cdc"
+import CaaPass from "../contracts/CaaPass.cdc"
 import ChainmonstersMarketplace from "../contracts/ChainmonstersMarketplace.cdc"
 import ChainmonstersRewards from "../contracts/ChainmonstersRewards.cdc"
 import Collectible from "../contracts/Collectible.cdc"
@@ -40,6 +41,12 @@ pub fun hasBlockleteGames(_ address: Address): Bool {
 pub fun hasCaaArts(_ address: Address): Bool {
     return getAccount(address)
         .getCapability<&{NonFungibleToken.CollectionPublic, CaaArts.CollectionPublic}>(CaaArts.CollectionPublicPath)
+        .check()
+}
+
+pub fun hasCaaPass(_ address: Address): Bool {
+    return getAccount(address)
+        .getCapability<&{NonFungibleToken.CollectionPublic, CaaPass.CollectionPublic}>(CaaPass.CollectionPublicPath)
         .check()
 }
 
@@ -192,6 +199,12 @@ transaction {
                  acct.save(<-CaaArts.createEmptyCollection(), to: CaaArts.CollectionStoragePath)
              }
              acct.link<&{NonFungibleToken.CollectionPublic, CaaArts.CollectionPublic}>(CaaArts.CollectionPublicPath, target: CaaArts.CollectionStoragePath)
+        }
+        if !hasCaaPass(acct.address) {
+             if acct.borrow<&CaaPass.Collection>(from: CaaPass.CollectionStoragePath) == nil {
+                 acct.save(<-CaaPass.createEmptyCollection(), to: CaaPass.CollectionStoragePath)
+             }
+             acct.link<&{NonFungibleToken.CollectionPublic, CaaPass.CollectionPublic}>(CaaPass.CollectionPublicPath, target: CaaPass.CollectionStoragePath)
         }
         if !hasChainmonstersMarketplace(acct.address) {
              if acct.borrow<&ChainmonstersMarketplace.Collection>(from: ChainmonstersMarketplace.CollectionStoragePath) == nil {

@@ -18,6 +18,7 @@ import MusicBlock from "../contracts/MusicBlock.cdc"
 import Mynft from "../contracts/Mynft.cdc"
 import NonFungibleToken from "../contracts/NonFungibleToken.cdc"
 import NyatheesOVO from "../contracts/NyatheesOVO.cdc"
+import RaceDay_NFT from "../contracts/RaceDay_NFT.cdc"
 import RareRooms_NFT from "../contracts/RareRooms_NFT.cdc"
 import RCRDSHPNFT from "../contracts/RCRDSHPNFT.cdc"
 import Shard from "../contracts/Shard.cdc"
@@ -110,6 +111,11 @@ pub fun main(address: Address): {String: Int} {
             .borrow<&{NonFungibleToken.CollectionPublic}>()
             ?? panic("Could not borrow capability from public collection")
     ret["NyatheesOVO"] = nyatheesOVOCollectionRef.getIDs().length;
+
+    let raceDayCollectionRef = account.getCapability(RaceDay_NFT.CollectionPublicPath)!
+            .borrow<&{NonFungibleToken.CollectionPublic}>()
+            ?? panic("Could not borrow capability from public collection")
+    ret["RaceDay"] = raceDayCollectionRef.getIDs().length;
 
     let rareRoomsCollectionRef = account.getCapability(RareRooms_NFT.CollectionPublicPath)!
             .borrow<&{NonFungibleToken.CollectionPublic}>()

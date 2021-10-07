@@ -18,6 +18,7 @@ import MusicBlock from "../contracts/MusicBlock.cdc"
 import Mynft from "../contracts/Mynft.cdc"
 import NonFungibleToken from "../contracts/NonFungibleToken.cdc"
 import NyatheesOVO from "../contracts/NyatheesOVO.cdc"
+import RaceDay_NFT from "../contracts/RaceDay_NFT.cdc"
 import RareRooms_NFT from "../contracts/RareRooms_NFT.cdc"
 import RCRDSHPNFT from "../contracts/RCRDSHPNFT.cdc"
 import Shard from "../contracts/Shard.cdc"
@@ -139,6 +140,12 @@ pub fun hasNyatheesOVO(_ address: Address): Bool {
         .check()
 }
 
+pub fun hasRaceDay(_ address: Address): Bool {
+    return getAccount(address)
+        .getCapability<&RaceDay_NFT.Collection{NonFungibleToken.CollectionPublic, RaceDay_NFT.RaceDay_NFTCollectionPublic}>(RaceDay_NFT.CollectionPublicPath)
+        .check()
+}
+
 pub fun hasRareRooms(_ address: Address): Bool {
     return getAccount(address)
         .getCapability<&RareRooms_NFT.Collection{NonFungibleToken.CollectionPublic, RareRooms_NFT.RareRooms_NFTCollectionPublic}>(RareRooms_NFT.CollectionPublicPath)
@@ -207,6 +214,7 @@ pub fun main(address: Address): {String: Bool} {
     ret["MusicBlock"] = hasMusicBlock(address)
     ret["Mynft"] = hasMynft(address)
     ret["NyatheesOVO"] = hasNyatheesOVO(address)
+    ret["RaceDay"] = hasRaceDay(address)
     ret["RareRooms"] = hasRareRooms(address)
     ret["RCRDSHPNFT"] = hasRCRDSHPNFT(address)
     ret["Shard"] = hasShard(address)

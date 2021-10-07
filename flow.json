@@ -175,6 +175,12 @@
         "mainnet": "0x75e0b6de94eb05d0"
       }
     },
+    "RaceDay_NFT": {
+      "source": "./contracts/RaceDay_NFT.cdc",
+      "aliases": {
+        "mainnet": "0x329feb3ab062d289"
+      }
+    },
     "RareRooms_NFT": {
       "source": "./contracts/RareRooms_NFT.cdc",
       "aliases": {
@@ -301,6 +307,7 @@
         "Mynft",
         "NonFungibleToken",
         "NyatheesOVO",
+        "RaceDay_NFT",
         "RareRooms_NFT",
         "RCRDSHPNFT",
         "Shard",

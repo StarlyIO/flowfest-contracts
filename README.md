@@ -3,6 +3,7 @@
 * `flow emulator`
 * `flow project deploy`
 * `flow accounts create --key e00591c315b218996e6d4372688dd7644d42dc1b80c19551339017a640a88088fa56ec7a5e33475c5284f98b13a2acfc8214631c8ca8ca6aec5f9bb6b665ba1c`
+* `flow transactions send transactions/transfer_flow.cdc 1.0 0x01cf0e2f2f715450`
 * `flow scripts execute scripts/setup_check.cdc 0x01cf0e2f2f715450`
 * `flow transactions send transactions/setup_account.cdc --signer emulator-debug`
 * `flow scripts execute scripts/setup_check.cdc 0x01cf0e2f2f715450`
@@ -39,6 +40,7 @@
 | Mynft                    | 0x1eced429f2012ef0 | 0xf6fcbef550d97aa5 |
 | NonFungibleToken         | 0x631e88ae7f1d7c20 | 0x1d7e57aa55817448 |
 | NyatheesOVO              | 0xacf3dfa413e00f9f | 0x75e0b6de94eb05d0 |
+| RaceDay                  | TBD                | 0x329feb3ab062d289 |
 | RareRooms (GigLabs)      | TBD                | 0x329feb3ab062d289 |
 | RCRDSHPNFT               | 0x95d41a94b49a1ed1 | 0x6c3ff40b90b928ab |
 | Shard (Eternal)          | 0x462b4dac28de23f3 | 0x82b54037a8f180cf |

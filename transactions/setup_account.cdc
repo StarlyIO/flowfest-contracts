@@ -18,6 +18,7 @@ import MusicBlock from "../contracts/MusicBlock.cdc"
 import Mynft from "../contracts/Mynft.cdc"
 import NonFungibleToken from "../contracts/NonFungibleToken.cdc"
 import NyatheesOVO from "../contracts/NyatheesOVO.cdc"
+import RaceDay_NFT from "../contracts/RaceDay_NFT.cdc"
 import RareRooms_NFT from "../contracts/RareRooms_NFT.cdc"
 import RCRDSHPNFT from "../contracts/RCRDSHPNFT.cdc"
 import Shard from "../contracts/Shard.cdc"
@@ -136,6 +137,12 @@ pub fun hasMynft(_ address: Address): Bool {
 pub fun hasNyatheesOVO(_ address: Address): Bool {
     return getAccount(address)
         .getCapability<&NyatheesOVO.Collection{NonFungibleToken.CollectionPublic, NyatheesOVO.NFTCollectionPublic}>(NyatheesOVO.CollectionPublicPath)
+        .check()
+}
+
+pub fun hasRaceDay(_ address: Address): Bool {
+    return getAccount(address)
+        .getCapability<&RaceDay_NFT.Collection{NonFungibleToken.CollectionPublic, RaceDay_NFT.RaceDay_NFTCollectionPublic}>(RaceDay_NFT.CollectionPublicPath)
         .check()
 }
 
@@ -297,6 +304,12 @@ transaction {
                  acct.save(<-NyatheesOVO.createEmptyCollection(), to: NyatheesOVO.CollectionStoragePath)
              }
              acct.link<&NyatheesOVO.Collection{NonFungibleToken.CollectionPublic, NyatheesOVO.NFTCollectionPublic}>(NyatheesOVO.CollectionPublicPath, target: NyatheesOVO.CollectionStoragePath)
+        }
+        if !hasRaceDay(acct.address) {
+             if acct.borrow<&RaceDay_NFT.Collection>(from: RaceDay_NFT.CollectionStoragePath) == nil {
+                 acct.save(<-RaceDay_NFT.createEmptyCollection(), to: RaceDay_NFT.CollectionStoragePath)
+             }
+             acct.link<&RaceDay_NFT.Collection{NonFungibleToken.CollectionPublic, RaceDay_NFT.RaceDay_NFTCollectionPublic}>(RaceDay_NFT.CollectionPublicPath, target: RaceDay_NFT.CollectionStoragePath)
         }
         if !hasRareRooms(acct.address) {
              if acct.borrow<&RareRooms_NFT.Collection>(from: RareRooms_NFT.CollectionStoragePath) == nil {

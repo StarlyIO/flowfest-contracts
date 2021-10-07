@@ -9,8 +9,9 @@
 
 # Useful scripts
 
+* `flow scripts execute scripts/setup_check.cdc 0x5f14b7e68e0bc3c3 --network mainnet`
 * `flow scripts execute scripts/read_collections_length.cdc 0x5f14b7e68e0bc3c3 --network mainnet`
-* `flow scripts execute scripts/read_collections_length.cdc 0x22a706cc6b8fe63b --network testnet`
+* `flow scripts execute scripts/read_collections_length.cdc 0x22a706cc6b8fe63b --network testnet` -- some projects need to be commented out
 
 # Contract addresses
 

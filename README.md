@@ -7,6 +7,11 @@
 * `flow transactions send transactions/setup_account.cdc --signer emulator-debug`
 * `flow scripts execute scripts/setup_check.cdc 0x01cf0e2f2f715450`
 
+# Useful scripts
+
+* `flow scripts execute scripts/read_collections_length.cdc 0x5f14b7e68e0bc3c3 --network mainnet`
+* `flow scripts execute scripts/read_collections_length.cdc 0x22a706cc6b8fe63b --network testnet`
+
 # Contract addresses
 
 | Contract                 | Testnet            | Mainnet            |

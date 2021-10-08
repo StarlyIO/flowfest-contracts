@@ -151,7 +151,7 @@
       "source": "./contracts/MusicBlock.cdc",
       "aliases": {
         "testnet": "0xeb3241ad7d7881db",
-        "mainnet": "0x3b73da28c2a82eef"
+        "mainnet": "0x5634aefcb76e7d8c"
       }
     },
     "Mynft": {
@@ -236,6 +236,13 @@
         "mainnet": "0x5b82f21c0edf76e3"
       }
     },
+    "TheFabricantMysteryBox_FF1": {
+      "source": "./contracts/TheFabricantMysteryBox_FF1.cdc",
+      "aliases": {
+        "testnet": "0xbc9d692e2617a96e",
+        "mainnet": "0xa0cbe021821c0965"
+      }
+    },
     "TuneGO": {
       "source": "./contracts/TuneGO.cdc",
       "aliases": {
@@ -316,6 +323,7 @@
         "SportsIconCounter",
         "StarlyCard",
         "StarlyCardMarket",
+        "TheFabricantMysteryBox_FF1",
         "TuneGO",
         "Vouchers"
       ]

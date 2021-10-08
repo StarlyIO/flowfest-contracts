@@ -47,6 +47,7 @@
 | SportsIcon               | 0xc2824327396d3a39 | 0x8de96244f54db422 |
 | StarlyCard               | 0x697d72a988a77070 | 0x5b82f21c0edf76e3 |
 | StarlyCardMarket         | 0x697d72a988a77070 | 0x5b82f21c0edf76e3 |
+| TheFabricant             | 0xbc9d692e2617a96e | 0x444f5ea22c6ea12c |
 | TuneGO                   | 0x2b0150231c047a8c | 0x0d9bc5af3fc0c2e3 |
 | Vouchers (Jambb)         | 0xe94a6e229293f196 | 0x444f5ea22c6ea12c |
 

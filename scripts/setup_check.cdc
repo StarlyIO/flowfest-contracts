@@ -22,6 +22,7 @@ import RCRDSHPNFT from "../contracts/RCRDSHPNFT.cdc"
 import Shard from "../contracts/Shard.cdc"
 import SportsIconCollectible from "../contracts/SportsIconCollectible.cdc"
 import StarlyCard from "../contracts/StarlyCard.cdc"
+import TheFabricantMysteryBox_FF1 from "../contracts/TheFabricantMysteryBox_FF1.cdc"
 import TuneGO from "../contracts/TuneGO.cdc"
 import Vouchers from "../contracts/Vouchers.cdc"
 
@@ -161,6 +162,12 @@ pub fun hasStarlyCard(_ address: Address): Bool {
         .check()
 }
 
+pub fun hasTheFabricant(_ address: Address): Bool {
+    return getAccount(address)
+        .getCapability<&{TheFabricantMysteryBox_FF1.FabricantCollectionPublic}>(TheFabricantMysteryBox_FF1.CollectionPublicPath)
+        .check()
+}
+
 pub fun hasTuneGO(_ address: Address): Bool {
     return getAccount(address)
         .getCapability<&{TuneGO.TuneGOCollectionPublic}>(TuneGO.CollectionPublicPath)
@@ -197,6 +204,7 @@ pub fun main(address: Address): {String: Bool} {
     ret["Shard"] = hasShard(address)
     ret["SportsIcon"] = hasSportsIcon(address)
     ret["StarlyCard"] = hasStarlyCard(address)
+    ret["TheFabricant"] = hasTheFabricant(address)
     ret["TuneGO"] = hasTuneGO(address)
     ret["Xtingles"] = hasXtingles(address)
     return ret

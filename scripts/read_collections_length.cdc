@@ -22,6 +22,7 @@ import RCRDSHPNFT from "../contracts/RCRDSHPNFT.cdc"
 import Shard from "../contracts/Shard.cdc"
 import SportsIconCollectible from "../contracts/SportsIconCollectible.cdc"
 import StarlyCard from "../contracts/StarlyCard.cdc"
+import TheFabricantMysteryBox_FF1 from "../contracts/TheFabricantMysteryBox_FF1.cdc"
 import TuneGO from "../contracts/TuneGO.cdc"
 import Vouchers from "../contracts/Vouchers.cdc"
 
@@ -133,6 +134,11 @@ pub fun main(address: Address): {String: Int} {
             .borrow<&{NonFungibleToken.CollectionPublic}>()
             ?? panic("Could not borrow capability from public collection")
     ret["Starly"] = starlyCollectionRef.getIDs().length;
+
+    let theFabricantCollectionRef = account.getCapability(TheFabricantMysteryBox_FF1.CollectionPublicPath)!
+            .borrow<&{TheFabricantMysteryBox_FF1.FabricantCollectionPublic}>()
+            ?? panic("Could not borrow capability from public collection")
+    ret["TheFabricant"] = theFabricantCollectionRef.getIDs().length;
 
     let tuneGoCollectionRef = account.getCapability(TuneGO.CollectionPublicPath)!
             .borrow<&{TuneGO.TuneGOCollectionPublic}>()

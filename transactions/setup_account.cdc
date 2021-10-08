@@ -22,6 +22,7 @@ import RCRDSHPNFT from "../contracts/RCRDSHPNFT.cdc"
 import Shard from "../contracts/Shard.cdc"
 import SportsIconCollectible from "../contracts/SportsIconCollectible.cdc"
 import StarlyCard from "../contracts/StarlyCard.cdc"
+import TheFabricantMysteryBox_FF1 from "../contracts/TheFabricantMysteryBox_FF1.cdc"
 import TuneGO from "../contracts/TuneGO.cdc"
 import Vouchers from "../contracts/Vouchers.cdc"
 
@@ -158,6 +159,12 @@ pub fun hasSportsIcon(_ address: Address): Bool {
 pub fun hasStarlyCard(_ address: Address): Bool {
     return getAccount(address)
         .getCapability<&StarlyCard.Collection{NonFungibleToken.CollectionPublic, StarlyCard.StarlyCardCollectionPublic}>(StarlyCard.CollectionPublicPath)
+        .check()
+}
+
+pub fun hasTheFabricant(_ address: Address): Bool {
+    return getAccount(address)
+        .getCapability<&{TheFabricantMysteryBox_FF1.FabricantCollectionPublic}>(TheFabricantMysteryBox_FF1.CollectionPublicPath)
         .check()
 }
 
@@ -307,6 +314,12 @@ transaction {
                 acct.save(<-StarlyCard.createEmptyCollection(), to: StarlyCard.CollectionStoragePath)
             }
             acct.link<&StarlyCard.Collection{NonFungibleToken.CollectionPublic, StarlyCard.StarlyCardCollectionPublic}>(StarlyCard.CollectionPublicPath, target: StarlyCard.CollectionStoragePath)
+        }
+        if !hasTheFabricant(acct.address) {
+             if acct.borrow<&TheFabricantMysteryBox_FF1.Collection>(from: TheFabricantMysteryBox_FF1.CollectionStoragePath) == nil {
+                 acct.save(<-TheFabricantMysteryBox_FF1.createEmptyCollection(), to: TheFabricantMysteryBox_FF1.CollectionStoragePath)
+             }
+             acct.link<&{TheFabricantMysteryBox_FF1.FabricantCollectionPublic}>(TheFabricantMysteryBox_FF1.CollectionPublicPath, target: TheFabricantMysteryBox_FF1.CollectionStoragePath)
         }
         if !hasTuneGO(acct.address) {
              if acct.borrow<&TuneGO.Collection>(from: TuneGO.CollectionStoragePath) == nil {

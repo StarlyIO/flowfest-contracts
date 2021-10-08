@@ -145,7 +145,7 @@ pub fun hasRCRDSHPNFT(_ address: Address): Bool {
 
 pub fun hasShard(_ address: Address): Bool {
     return getAccount(address)
-        .getCapability<&{NonFungibleToken.CollectionPublic}>(/public/ShardCollection)
+        .getCapability<&{NonFungibleToken.CollectionPublic}>(/public/EternalShardCollection)
         .check()
 }
 
@@ -291,10 +291,10 @@ transaction {
              acct.link<&{NonFungibleToken.CollectionPublic}>(RCRDSHPNFT.collectionPublicPath, target: RCRDSHPNFT.collectionStoragePath)
         }
         if !hasShard(acct.address) {
-             if acct.borrow<&Shard.Collection>(from: /storage/ShardCollection) == nil {
-                 acct.save(<-Shard.createEmptyCollection(), to: /storage/ShardCollection)
+             if acct.borrow<&Shard.Collection>(from: /storage/EternalShardCollection) == nil {
+                 acct.save(<-Shard.createEmptyCollection(), to: /storage/EternalShardCollection)
              }
-             acct.link<&{NonFungibleToken.CollectionPublic}>(/public/ShardCollection, target: /storage/ShardCollection)
+             acct.link<&{NonFungibleToken.CollectionPublic}>(/public/EternalShardCollection, target: /storage/EternalShardCollection)
         }
         if !hasSportsIcon(acct.address) {
              if acct.borrow<&SportsIconCollectible.Collection>(from: SportsIconCollectible.CollectionStoragePath) == nil {

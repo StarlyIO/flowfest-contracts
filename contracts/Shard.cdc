@@ -36,7 +36,7 @@ pub contract Shard: NonFungibleToken {
         pub let splits: UInt8
 
         // The metadata for a Moment
-        pub let metadata: {String: String}
+        access(contract) let metadata: {String: String}
 
         init(influencerID: String, splits: UInt8, metadata: {String: String}) {
             pre {
@@ -72,7 +72,7 @@ pub contract Shard: NonFungibleToken {
         pub let sequence: UInt8
 
         // Stores all the metadata about the Clip as a string mapping
-        pub let metadata: {String: String}
+        access(contract) let metadata: {String: String}
 
         init(momentID: UInt32, sequence: UInt8, metadata: {String: String}) {
             pre {
@@ -99,6 +99,19 @@ pub contract Shard: NonFungibleToken {
         }
     }
 
+    // Add your own Collection interface so you can use it later
+    pub resource interface ShardCollectionPublic {
+        pub fun deposit(token: @NonFungibleToken.NFT)
+        pub fun getIDs(): [UInt64]
+        pub fun borrowNFT(id: UInt64): &NonFungibleToken.NFT
+        pub fun borrowShardNFT(id: UInt64): &Shard.NFT? {
+            post {
+                (result == nil) || (result?.id == id):
+                    "Cannot borrow Shard reference: The ID of the returned reference is incorrect"
+            }
+        }
+    }
+
     pub resource NFT: NonFungibleToken.INFT {
         // Identifier of NFT
         pub let id: UInt64
@@ -114,11 +127,14 @@ pub contract Shard: NonFungibleToken {
             self.id = initID
             self.clipID = clipID
 
+            // Increase the total supply counter
+            Shard.totalSupply = Shard.totalSupply + (1 as UInt64)
+
             emit ShardMinted(id: self.id, clipID: self.clipID)
         }
     }
 
-    pub resource Collection: NonFungibleToken.Provider, NonFungibleToken.Receiver, NonFungibleToken.CollectionPublic {
+    pub resource Collection: ShardCollectionPublic, NonFungibleToken.Provider, NonFungibleToken.Receiver, NonFungibleToken.CollectionPublic {
         // A resource type with an `UInt64` ID field
         pub var ownedNFTs: @{UInt64: NonFungibleToken.NFT}
 
@@ -155,6 +171,16 @@ pub contract Shard: NonFungibleToken {
         // so that the caller can read its metadata and call its methods
         pub fun borrowNFT(id: UInt64): &NonFungibleToken.NFT {
             return &self.ownedNFTs[id] as &NonFungibleToken.NFT
+        }
+
+        // Gets a reference to the Shard NFT for metadata and such
+        pub fun borrowShardNFT(id: UInt64): &Shard.NFT? {
+            if self.ownedNFTs[id] != nil {
+                let ref = &self.ownedNFTs[id] as auth &NonFungibleToken.NFT
+                return ref as! &Shard.NFT
+            } else {
+                return nil
+            }
         }
 
         destroy() {
@@ -197,7 +223,7 @@ pub contract Shard: NonFungibleToken {
 
         // Mints a new NFT with a new ID
         pub fun mintNFT(
-            recipient: &{NonFungibleToken.CollectionPublic},
+            recipient: &{Shard.ShardCollectionPublic},
             clipID: UInt32
         ) {
             // Creates a new NFT with provided arguments
@@ -208,13 +234,10 @@ pub contract Shard: NonFungibleToken {
 
             // Deposits it in the recipient's account using their reference
             recipient.deposit(token: <-newNFT)
-
-            // Increase the total supply counter
-            Shard.totalSupply = Shard.totalSupply + (1 as UInt64)
         }
 
         pub fun batchMintNFT(
-            recipient: &{NonFungibleToken.CollectionPublic},
+            recipient: &{Shard.ShardCollectionPublic},
             clipID: UInt32,
             quantity: UInt64
 
@@ -233,7 +256,7 @@ pub contract Shard: NonFungibleToken {
     }
 
     // Public function that anyone can call to create a new empty collection
-    pub fun createEmptyCollection(): @NonFungibleToken.Collection {
+    pub fun createEmptyCollection(): @Shard.Collection {
         return <- create Collection()
     }
 
@@ -275,17 +298,15 @@ pub contract Shard: NonFungibleToken {
         self.clips = {}
 
         // Create a Collection resource and save it to storage
-        let collection <- create Collection()
-        self.account.save(<-collection, to: /storage/ShardCollection)
+        self.account.save(<-create Collection(), to: /storage/EternalShardCollection)
 
         // Create an Admin resource and save it to storage
-        let admin <- create Admin()
-        self.account.save(<-admin, to: /storage/ShardAdmin)
+        self.account.save(<- create Admin(), to: /storage/EternalShardAdmin)
 
         // Create a public capability for the collection
-        self.account.link<&{NonFungibleToken.CollectionPublic}>(
-            /public/ShardCollection,
-            target: /storage/ShardCollection
+        self.account.link<&{Shard.ShardCollectionPublic}>(
+            /public/EternalShardCollection,
+            target: /storage/EternalShardCollection
         )
 
         emit ContractInitialized()

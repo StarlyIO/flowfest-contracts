@@ -145,7 +145,7 @@ pub fun hasRCRDSHPNFT(_ address: Address): Bool {
 
 pub fun hasShard(_ address: Address): Bool {
     return getAccount(address)
-        .getCapability<&{NonFungibleToken.CollectionPublic}>(/public/ShardCollection)
+        .getCapability<&{NonFungibleToken.CollectionPublic}>(/public/EternalShardCollection)
         .check()
 }
 

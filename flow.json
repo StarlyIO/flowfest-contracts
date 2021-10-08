@@ -197,7 +197,7 @@
     "Shard": {
       "source": "./contracts/Shard.cdc",
       "aliases": {
-        "testnet": "0x462b4dac28de23f3",
+        "testnet": "0x7ff5f9ac593c3ee0",
         "mainnet": "0x82b54037a8f180cf"
       }
     },

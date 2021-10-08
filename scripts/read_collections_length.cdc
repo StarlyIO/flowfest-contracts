@@ -119,7 +119,7 @@ pub fun main(address: Address): {String: Int} {
             ?? panic("Could not borrow capability from public collection")
     ret["RCRDSHPNFT"] = rcrdshpnftCollectionRef.getIDs().length;
 
-    let shardCollectionRef = account.getCapability(/public/ShardCollection)!
+    let shardCollectionRef = account.getCapability(/public/EternalShardCollection)!
             .borrow<&{NonFungibleToken.CollectionPublic}>()
             ?? panic("Could not borrow capability from public collection")
     ret["Shard"] = shardCollectionRef.getIDs().length;

@@ -43,7 +43,7 @@
 | RaceDay                  | TBD                | 0x329feb3ab062d289 |
 | RareRooms (GigLabs)      | TBD                | 0x329feb3ab062d289 |
 | RCRDSHPNFT               | 0x95d41a94b49a1ed1 | 0x6c3ff40b90b928ab |
-| Shard (Eternal)          | 0x462b4dac28de23f3 | 0x82b54037a8f180cf |
+| Shard (Eternal)          | 0x7ff5f9ac593c3ee0 | 0x82b54037a8f180cf |
 | SportsIcon               | 0xc2824327396d3a39 | 0x8de96244f54db422 |
 | StarlyCard               | 0x697d72a988a77070 | 0x5b82f21c0edf76e3 |
 | StarlyCardMarket         | 0x697d72a988a77070 | 0x5b82f21c0edf76e3 |

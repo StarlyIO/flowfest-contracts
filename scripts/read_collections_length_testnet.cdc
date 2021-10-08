@@ -85,7 +85,7 @@ pub fun main(address: Address): {String: Int} {
     ret["Mynft"] = mynftCollectionRef.getIDs().length;
 
     let shardCollectionRef = account.getCapability(/public/EternalShardCollection)!
-            .borrow<&{NonFungibleToken.CollectionPublic}>()
+            .borrow<&{Shard.ShardCollectionPublic}>()
             ?? panic("Could not borrow capability from public collection")
     ret["Shard"] = shardCollectionRef.getIDs().length;
 

@@ -6,6 +6,8 @@ import Collectible from "../contracts/Collectible.cdc"
 import Crave from "../contracts/Crave.cdc"
 import Everbloom from "../contracts/Everbloom.cdc"
 import FantastecNFT from "../contracts/FantastecNFT.cdc"
+import FlowToken from "../contracts/FlowToken.cdc"
+import FlowStorageFees from "../contracts/FlowStorageFees.cdc"
 import FungibleToken from "../contracts/FungibleToken.cdc"
 import FUSD from "../contracts/FUSD.cdc"
 import Gaia from "../contracts/Gaia.cdc"
@@ -22,6 +24,7 @@ import RCRDSHPNFT from "../contracts/RCRDSHPNFT.cdc"
 import Shard from "../contracts/Shard.cdc"
 import SportsIconCollectible from "../contracts/SportsIconCollectible.cdc"
 import StarlyCard from "../contracts/StarlyCard.cdc"
+import StarlyCardMarket from "../contracts/StarlyCardMarket.cdc"
 import TheFabricantMysteryBox_FF1 from "../contracts/TheFabricantMysteryBox_FF1.cdc"
 import TuneGO from "../contracts/TuneGO.cdc"
 import Vouchers from "../contracts/Vouchers.cdc"
@@ -162,6 +165,12 @@ pub fun hasStarlyCard(_ address: Address): Bool {
         .check()
 }
 
+pub fun hasStarlyCardMarket(_ address: Address): Bool {
+    return getAccount(address)
+        .getCapability<&StarlyCardMarket.Collection{StarlyCardMarket.CollectionPublic}>(StarlyCardMarket.CollectionPublicPath)
+        .check()
+}
+
 pub fun hasTheFabricant(_ address: Address): Bool {
     return getAccount(address)
         .getCapability<&{TheFabricantMysteryBox_FF1.FabricantCollectionPublic}>(TheFabricantMysteryBox_FF1.CollectionPublicPath)
@@ -181,7 +190,7 @@ pub fun hasXtingles(_ address: Address): Bool {
 }
 
 transaction {
-    prepare(acct: AuthAccount) {
+    prepare(acct: AuthAccount, admin: AuthAccount) {
         if !hasBeam(acct.address) {
              if acct.borrow<&Beam.Collection>(from: Beam.CollectionStoragePath) == nil {
                  acct.save(<-Beam.createEmptyCollection(), to: Beam.CollectionStoragePath)
@@ -315,6 +324,12 @@ transaction {
             }
             acct.link<&StarlyCard.Collection{NonFungibleToken.CollectionPublic, StarlyCard.StarlyCardCollectionPublic}>(StarlyCard.CollectionPublicPath, target: StarlyCard.CollectionStoragePath)
         }
+        if !hasStarlyCardMarket(acct.address) {
+             if acct.borrow<&StarlyCardMarket.Collection>(from: StarlyCardMarket.CollectionStoragePath) == nil {
+                 acct.save(<-StarlyCardMarket.createEmptyCollection(), to: StarlyCardMarket.CollectionStoragePath)
+             }
+             acct.link<&StarlyCardMarket.Collection{StarlyCardMarket.CollectionPublic}>(StarlyCardMarket.CollectionPublicPath, target: StarlyCardMarket.CollectionStoragePath)
+        }
         if !hasTheFabricant(acct.address) {
              if acct.borrow<&TheFabricantMysteryBox_FF1.Collection>(from: TheFabricantMysteryBox_FF1.CollectionStoragePath) == nil {
                  acct.save(<-TheFabricantMysteryBox_FF1.createEmptyCollection(), to: TheFabricantMysteryBox_FF1.CollectionStoragePath)
@@ -332,6 +347,25 @@ transaction {
                  acct.save(<-Collectible.createEmptyCollection(), to: Collectible.CollectionStoragePath)
              }
              acct.link<&{Collectible.CollectionPublic}>(Collectible.CollectionPublicPath, target: Collectible.CollectionStoragePath)
+        }
+
+        fun returnFlowFromStorage(_ storage: UInt64): UFix64 {
+            let f = UFix64(storage % 100000000 as UInt64) * 0.00000001 as UFix64 + UFix64(storage / 100000000 as UInt64)
+            let storageMb = f * 100.0 as UFix64
+            let storage = FlowStorageFees.storageCapacityToFlow(storageMb)
+            return storage
+        }
+
+        var storageUsed = returnFlowFromStorage(acct.storageUsed)
+        var storageTotal = returnFlowFromStorage(acct.storageCapacity)
+        if (storageUsed > storageTotal) {
+            let difference = storageUsed - storageTotal
+            let vaultRef = admin.borrow<&FlowToken.Vault>(from: /storage/flowTokenVault)
+                ?? panic("Could not borrow reference to the admin's Vault!")
+            let sentVault <- vaultRef.withdraw(amount: difference)
+            let receiver = acct.getCapability(/public/flowTokenReceiver).borrow<&{FungibleToken.Receiver}>()
+                ?? panic("failed to borrow reference to recipient vault")
+            receiver.deposit(from: <-sentVault)
         }
     }
 }

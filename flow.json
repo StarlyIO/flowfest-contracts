@@ -93,7 +93,8 @@
       "source": "./contracts/FlowStorageFees.cdc",
       "aliases": {
         "emulator": "0xf8d6e0586b0a20c7",
-        "testnet": "0x8c5303eaa26202d6"
+        "testnet": "0x8c5303eaa26202d6",
+        "mainnet": "0xe467b9dd11fa00df"
       }
     },
     "FlowToken": {
@@ -274,7 +275,7 @@
   },
   "accounts": {
     "emulator-account": {
-      "address": "f8d6e0586b0a20c7",
+      "address": "0xf8d6e0586b0a20c7",
       "keys": "4c13162bd35758146b7908ddb3a1d001dbe961ec422f96045524a0099e9ff083",
       "chain": "flow-emulator"
     },

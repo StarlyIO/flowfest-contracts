@@ -36,7 +36,7 @@
 | KLKTN                    | 0x336895dbe44c4b44 | 0xabd6e80be7e9682c |
 | KOTD                     | 0x6085ae87e78e1433 | 0x23dddd854fcc8c6f |
 | MatrixWorldFlowFestNFT   | 0xe2f1b000e0203c1d | 0x2d2750f240198f91 |
-| MusicBlock (Melos)       | 0xeb3241ad7d7881db | 0x3b73da28c2a82eef |
+| MusicBlock (Melos)       | 0xeb3241ad7d7881db | 0x5634aefcb76e7d8c |
 | Mynft                    | 0x1eced429f2012ef0 | 0xf6fcbef550d97aa5 |
 | NonFungibleToken         | 0x631e88ae7f1d7c20 | 0x1d7e57aa55817448 |
 | NyatheesOVO              | 0xacf3dfa413e00f9f | 0x75e0b6de94eb05d0 |

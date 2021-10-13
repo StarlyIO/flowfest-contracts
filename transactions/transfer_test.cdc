@@ -4,6 +4,7 @@ import CaaPass from "../contracts/CaaPass.cdc"
 import ChainmonstersRewards from "../contracts/ChainmonstersRewards.cdc"
 import Collectible from "../contracts/Collectible.cdc"
 import Crave from "../contracts/Crave.cdc"
+import CricketMoments from "../contracts/CricketMoments.cdc"
 import Everbloom from "../contracts/Everbloom.cdc"
 import FantastecNFT from "../contracts/FantastecNFT.cdc"
 import FlowToken from "../contracts/FlowToken.cdc"
@@ -136,6 +137,16 @@ transaction() {
                                     ?? panic("Could not borrow a reference to the owner's FantastecNFT collection")
                         let receiverRef = recipient.getCapability(FantastecNFT.CollectionPublicPath)!.borrow<&FantastecNFT.Collection{NonFungibleToken.CollectionPublic, FantastecNFT.FantastecNFTCollectionPublic}>()
                                     ?? panic("Could not borrow FantastecNFT receiver reference")
+                        for id in cards![projectName]! {
+                            let nft <- collectionRef.withdraw(withdrawID: id)
+                            receiverRef.deposit(token: <- nft)
+                        }
+
+                    case "faze":
+                        let collectionRef = acct.borrow<&CricketMoments.Collection>(from: CricketMoments.CollectionStoragePath)
+                                    ?? panic("Could not borrow a reference to the owner's CricketMoments collection")
+                        let receiverRef = recipient.getCapability(CricketMoments.CollectionPublicPath)!.borrow<&CricketMoments.Collection{NonFungibleToken.CollectionPublic, CricketMoments.CricketMomentsCollectionPublic}>()
+                                    ?? panic("Could not borrow CricketMoments receiver reference")
                         for id in cards![projectName]! {
                             let nft <- collectionRef.withdraw(withdrawID: id)
                             receiverRef.deposit(token: <- nft)

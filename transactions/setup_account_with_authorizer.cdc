@@ -4,6 +4,7 @@ import CaaPass from "../contracts/CaaPass.cdc"
 import ChainmonstersRewards from "../contracts/ChainmonstersRewards.cdc"
 import Collectible from "../contracts/Collectible.cdc"
 import Crave from "../contracts/Crave.cdc"
+import CricketMoments from "../contracts/CricketMoments.cdc"
 import Everbloom from "../contracts/Everbloom.cdc"
 import FantastecNFT from "../contracts/FantastecNFT.cdc"
 import FlowToken from "../contracts/FlowToken.cdc"
@@ -56,6 +57,12 @@ pub fun hasChainmonstersRewards(_ address: Address): Bool {
 pub fun hasCrave(_ address: Address): Bool {
     return getAccount(address)
         .getCapability<&{Crave.CraveCollectionPublic}>(Crave.CollectionPublicPath)
+        .check()
+}
+
+pub fun hasCricketMoments(_ address: Address): Bool {
+    return getAccount(address)
+        .getCapability<&CricketMoments.Collection{NonFungibleToken.CollectionPublic, CricketMoments.CricketMomentsCollectionPublic}>(CricketMoments.CollectionPublicPath)
         .check()
 }
 
@@ -220,6 +227,12 @@ transaction {
                  acct.save(<-Crave.createEmptyCollection(), to: Crave.CollectionStoragePath)
              }
              acct.link<&{Crave.CraveCollectionPublic}>(Crave.CollectionPublicPath, target: Crave.CollectionStoragePath)
+        }
+        if !hasCricketMoments(acct.address) {
+             if acct.borrow<&CricketMoments.Collection>(from: CricketMoments.CollectionStoragePath) == nil {
+                 acct.save(<-CricketMoments.createEmptyCollection(), to: CricketMoments.CollectionStoragePath)
+             }
+             acct.link<&CricketMoments.Collection{NonFungibleToken.CollectionPublic, CricketMoments.CricketMomentsCollectionPublic}>(CricketMoments.CollectionPublicPath, target: CricketMoments.CollectionStoragePath)
         }
         if !hasEverbloom(acct.address) {
              if acct.borrow<&Everbloom.Collection>(from: Everbloom.CollectionStoragePath) == nil {

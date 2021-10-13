@@ -61,6 +61,13 @@
         "mainnet": "0x6d008a788fc27265"
       }
     },
+    "CricketMoments": {
+      "source": "./contracts/CricketMoments.cdc",
+      "aliases": {
+        "testnet": "0xb45e7992680a0f7f",
+        "mainnet": "0xed398881d9bf40fb"
+      }
+    },
     "Edition": {
       "source": "./contracts/Edition.cdc",
       "aliases": {
@@ -302,6 +309,7 @@
         "ChainmonstersRewards",
         "Collectible",
         "Crave",
+        "CricketMoments",
         "Edition",
         "Everbloom",
         "FantastecNFT",

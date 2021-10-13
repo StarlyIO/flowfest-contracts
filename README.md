@@ -25,6 +25,7 @@
 | ChainmonstersRewards     | 0x75783e3c937304a8 | 0x93615d25d14fa337 |
 | Collectible (Xtingles)   | 0x85080f371da20cc1 | 0xf5b0eb433389ac3f |
 | Crave (Niftory)          | 0x6085ae87e78e1433 | 0x6d008a788fc27265 |
+| CricketMoments (Faze)    | 0xb45e7992680a0f7f | 0xed398881d9bf40fb |
 | Everbloom                | 0xf30d2f642de8c895 | 0xe703f7fee6400754 |
 | FantastecNFT             | 0x7b4fab78fbddc57e | 0x2e1ee1e7a96826ce |
 | FantastecSwapData        | 0x7b4fab78fbddc57e | 0x2e1ee1e7a96826ce |
@@ -47,7 +48,7 @@
 | SportsIcon               | 0xc2824327396d3a39 | 0x8de96244f54db422 |
 | StarlyCard               | 0x697d72a988a77070 | 0x5b82f21c0edf76e3 |
 | StarlyCardMarket         | 0x697d72a988a77070 | 0x5b82f21c0edf76e3 |
-| TheFabricant             | 0xbc9d692e2617a96e | 0x444f5ea22c6ea12c |
+| TheFabricant             | 0xbc9d692e2617a96e | 0xa0cbe021821c0965 |
 | TuneGO                   | 0x2b0150231c047a8c | 0x0d9bc5af3fc0c2e3 |
 | Vouchers (Jambb)         | 0xe94a6e229293f196 | 0x444f5ea22c6ea12c |
 

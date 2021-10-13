@@ -4,6 +4,7 @@ import CaaPass from "../contracts/CaaPass.cdc"
 import ChainmonstersRewards from "../contracts/ChainmonstersRewards.cdc"
 import Collectible from "../contracts/Collectible.cdc"
 import Crave from "../contracts/Crave.cdc"
+import CricketMoments from "../contracts/CricketMoments.cdc"
 import Everbloom from "../contracts/Everbloom.cdc"
 import FantastecNFT from "../contracts/FantastecNFT.cdc"
 import FungibleToken from "../contracts/FungibleToken.cdc"
@@ -47,6 +48,10 @@ pub fun main(address: Address): {String: UInt64} {
     let craveCollectionRef = account.getCapability(Crave.CollectionPublicPath)!.borrow<&{Crave.CraveCollectionPublic}>()
         ?? panic("Could not borrow Crave receiver reference")
     ret["Crave"] = craveCollectionRef.getIDs()[0];
+
+    let cricketMomentsCollectionRef = account.getCapability(CricketMoments.CollectionPublicPath)!.borrow<&CricketMoments.Collection{NonFungibleToken.CollectionPublic, CricketMoments.CricketMomentsCollectionPublic}>()
+        ?? panic("Could not borrow Crave receiver reference")
+    ret["CricketMoments"] = cricketMomentsCollectionRef.getIDs()[0];
 
     let shardCollectionRef = account.getCapability(/public/EternalShardCollection)!.borrow<&{Shard.ShardCollectionPublic}>()
         ?? panic("Could not borrow Shard receiver reference")

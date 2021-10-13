@@ -4,6 +4,7 @@ import CaaPass from "../contracts/CaaPass.cdc"
 import ChainmonstersRewards from "../contracts/ChainmonstersRewards.cdc"
 import Collectible from "../contracts/Collectible.cdc"
 import Crave from "../contracts/Crave.cdc"
+import CricketMoments from "../contracts/CricketMoments.cdc"
 import Everbloom from "../contracts/Everbloom.cdc"
 import FantastecNFT from "../contracts/FantastecNFT.cdc"
 import FungibleToken from "../contracts/FungibleToken.cdc"
@@ -53,6 +54,12 @@ pub fun hasChainmonstersRewards(_ address: Address): Bool {
 pub fun hasCrave(_ address: Address): Bool {
     return getAccount(address)
         .getCapability<&{Crave.CraveCollectionPublic}>(Crave.CollectionPublicPath)
+        .check()
+}
+
+pub fun hasCricketMoments(_ address: Address): Bool {
+    return getAccount(address)
+        .getCapability<&CricketMoments.Collection{NonFungibleToken.CollectionPublic, CricketMoments.CricketMomentsCollectionPublic}>(CricketMoments.CollectionPublicPath)
         .check()
 }
 
@@ -187,6 +194,7 @@ pub fun main(address: Address): {String: Bool} {
     ret["CaaPass"] = hasCaaPass(address)
     ret["ChainmonstersRewards"] = hasChainmonstersRewards(address)
     ret["Crave"] = hasCrave(address)
+    ret["CricketMoments"] = hasCricketMoments(address)
     ret["Everbloom"] = hasEverbloom(address)
     ret["Fantastec"] = hasFantastec(address)
     ret["FUSD"] = hasFUSD(address)

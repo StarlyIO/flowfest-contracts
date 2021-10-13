@@ -4,6 +4,7 @@ import CaaPass from "../contracts/CaaPass.cdc"
 import ChainmonstersRewards from "../contracts/ChainmonstersRewards.cdc"
 import Collectible from "../contracts/Collectible.cdc"
 import Crave from "../contracts/Crave.cdc"
+import CricketMoments from "../contracts/CricketMoments.cdc"
 import Everbloom from "../contracts/Everbloom.cdc"
 import FantastecNFT from "../contracts/FantastecNFT.cdc"
 import FungibleToken from "../contracts/FungibleToken.cdc"
@@ -54,6 +55,11 @@ pub fun main(address: Address): {String: Int} {
                 .borrow<&{Crave.CraveCollectionPublic}>()
                 ?? panic("Could not borrow capability from public collection")
     ret["Crave"] = craveCollectionRef.getIDs().length;
+
+    let cricketMomentsCollectionRef = account.getCapability(CricketMoments.CollectionPublicPath)!
+                .borrow<&CricketMoments.Collection{NonFungibleToken.CollectionPublic, CricketMoments.CricketMomentsCollectionPublic}>()
+                ?? panic("Could not borrow capability from public collection")
+    ret["CricketMoments"] = cricketMomentsCollectionRef.getIDs().length;
 
     let everbloomCollectionRef = account.getCapability(Everbloom.CollectionPublicPath)!
                 .borrow<&{Everbloom.PrintCollectionPublic}>()

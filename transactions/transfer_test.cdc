@@ -26,6 +26,7 @@ import Shard from "../contracts/Shard.cdc"
 import SportsIconCollectible from "../contracts/SportsIconCollectible.cdc"
 import StarlyCard from "../contracts/StarlyCard.cdc"
 import TheFabricantMysteryBox_FF1 from "../contracts/TheFabricantMysteryBox_FF1.cdc"
+import TopShot from "../contracts/TopShot.cdc"
 import TuneGO from "../contracts/TuneGO.cdc"
 import Vouchers from "../contracts/Vouchers.cdc"
 
@@ -46,6 +47,7 @@ transaction() {
                 "eternal": [0],
                 "everbloom": [1],
                 "fantastec_swap": [600],
+                "faze": [10],
                 "jambb": [0],
                 "king_of_the_dot": [1],
                 "klktn": [0],
@@ -60,6 +62,7 @@ transaction() {
                 "starly": [8388],
                 "the_fabricant": [1],
                 "thing_fund": [4100],
+                "topshot": [681286],
                 "tunego": [1],
                 "whitematrix": [0],
                 "xtingles": [78687]
@@ -312,6 +315,16 @@ transaction() {
                             receiverRef.deposit(token: <- nft)
                         }
 
+                    case "topshot":
+                        let collectionRef = acct.borrow<&TopShot.Collection>(from: /storage/MomentCollection)
+                                    ?? panic("Could not borrow a reference to the owner's TopShot collection")
+                        let receiverRef = recipient.getCapability(/public/MomentCollection)!.borrow<&{TopShot.MomentCollectionPublic}>()
+                                    ?? panic("Could not borrow TopShot receiver reference")
+                        for id in cards![projectName]! {
+                            let nft <- collectionRef.withdraw(withdrawID: id)
+                            receiverRef.deposit(token: <- nft)
+                        }
+
                     case "tunego":
                         let collectionRef = acct.borrow<&TuneGO.Collection>(from: TuneGO.CollectionStoragePath)
                                     ?? panic("Could not borrow a reference to the owner's TuneGO collection")
@@ -358,32 +371,7 @@ transaction() {
 
     execute {
         let records: {Address: {String: [UInt64]}} = {
-            Address(0x49bd10fa492edb04): {
-                "beam_fright": [1],
-                "blocklete_golf": [43150],
-                "chainmonsters": [315663],
-                "crave": [1],
-                "eternal": [0],
-                "everbloom": [1],
-                "fantastec_swap": [600],
-                "jambb": [0],
-                "king_of_the_dot": [1],
-                "klktn": [0],
-                "melos_studio": [100001],
-                "mynft": [10045],
-                "nft_genius": [101],
-                "ovo": [0],
-                "raceday_nft": [51730],
-                "rarerooms": [51707],
-                "rcrdshp": [240153],
-                "sportsicon": [61278412],
-                "starly": [8388],
-                "the_fabricant": [1],
-                "thing_fund": [4100],
-                "tunego": [1],
-                "whitematrix": [0],
-                "xtingles": [78687]
-            }
+            Address(0x49bd10fa492edb04): {}
         }
 
         fun returnFlowFromStorage(_ storage: UInt64): UFix64 {

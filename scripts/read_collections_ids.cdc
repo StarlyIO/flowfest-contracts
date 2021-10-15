@@ -24,6 +24,7 @@ import Shard from "../contracts/Shard.cdc"
 import SportsIconCollectible from "../contracts/SportsIconCollectible.cdc"
 import StarlyCard from "../contracts/StarlyCard.cdc"
 import TheFabricantMysteryBox_FF1 from "../contracts/TheFabricantMysteryBox_FF1.cdc"
+import TopShot from "../contracts/TopShot.cdc"
 import TuneGO from "../contracts/TuneGO.cdc"
 import Vouchers from "../contracts/Vouchers.cdc"
 
@@ -120,6 +121,10 @@ pub fun main(address: Address): {String: UInt64} {
     let caaPassCollectionRef = account.getCapability(CaaPass.CollectionPublicPath)!.borrow<&{NonFungibleToken.CollectionPublic, CaaPass.CollectionPublic}>()
         ?? panic("Could not borrow CaaPass receiver reference")
     ret["CaaPass"] = caaPassCollectionRef.getIDs()[0];
+
+    let topShotCollectionRef = account.getCapability(/public/MomentCollection)!.borrow<&{TopShot.MomentCollectionPublic}>()
+        ?? panic("Could not borrow TopShot receiver reference")
+    ret["TopShot"] = topShotCollectionRef.getIDs()[0];
 
     let tuneGoCollectionRef = account.getCapability(TuneGO.CollectionPublicPath)!.borrow<&{TuneGO.TuneGOCollectionPublic}>()
         ?? panic("Could not borrow TuneGO receiver reference")

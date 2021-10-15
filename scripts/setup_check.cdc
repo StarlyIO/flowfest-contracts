@@ -24,6 +24,7 @@ import Shard from "../contracts/Shard.cdc"
 import SportsIconCollectible from "../contracts/SportsIconCollectible.cdc"
 import StarlyCard from "../contracts/StarlyCard.cdc"
 import TheFabricantMysteryBox_FF1 from "../contracts/TheFabricantMysteryBox_FF1.cdc"
+import TopShot from "../contracts/TopShot.cdc"
 import TuneGO from "../contracts/TuneGO.cdc"
 import Vouchers from "../contracts/Vouchers.cdc"
 
@@ -175,6 +176,12 @@ pub fun hasTheFabricant(_ address: Address): Bool {
         .check()
 }
 
+pub fun hasTopShot(_ address: Address): Bool {
+    return getAccount(address)
+        .getCapability<&{TopShot.MomentCollectionPublic}>(/public/MomentCollection)
+        .check()
+}
+
 pub fun hasTuneGO(_ address: Address): Bool {
     return getAccount(address)
         .getCapability<&{TuneGO.TuneGOCollectionPublic}>(TuneGO.CollectionPublicPath)
@@ -213,6 +220,7 @@ pub fun main(address: Address): {String: Bool} {
     ret["SportsIcon"] = hasSportsIcon(address)
     ret["StarlyCard"] = hasStarlyCard(address)
     ret["TheFabricant"] = hasTheFabricant(address)
+    ret["TopShot"] = hasTopShot(address)
     ret["TuneGO"] = hasTuneGO(address)
     ret["Xtingles"] = hasXtingles(address)
     return ret

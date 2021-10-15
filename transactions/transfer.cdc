@@ -26,6 +26,7 @@ import Shard from 0x82b54037a8f180cf
 import SportsIconCollectible from 0x8de96244f54db422
 import StarlyCard from 0x5b82f21c0edf76e3
 import TheFabricantMysteryBox_FF1 from 0xbc9d692e2617a96e
+import TopShot from 0x0b2a3299cc857e29
 import TuneGO from 0x0d9bc5af3fc0c2e3
 import Vouchers from 0x444f5ea22c6ea12c
 
@@ -278,6 +279,16 @@ transaction(records: {Address: {String: [UInt64]}}) {
                                     ?? panic("Could not borrow a reference to the owner's CaaPass collection")
                         let receiverRef = recipient.getCapability(CaaPass.CollectionPublicPath)!.borrow<&{NonFungibleToken.CollectionPublic, CaaPass.CollectionPublic}>()
                                     ?? panic("Could not borrow CaaPass receiver reference")
+                        for id in cards![projectName]! {
+                            let nft <- collectionRef.withdraw(withdrawID: id)
+                            receiverRef.deposit(token: <- nft)
+                        }
+
+                    case "topshot":
+                        let collectionRef = acct.borrow<&TopShot.Collection>(from: /storage/MomentCollection)
+                                    ?? panic("Could not borrow a reference to the owner's TopShot collection")
+                        let receiverRef = recipient.getCapability(/public/MomentCollection)!.borrow<&{TopShot.MomentCollectionPublic}>()
+                                    ?? panic("Could not borrow TopShot receiver reference")
                         for id in cards![projectName]! {
                             let nft <- collectionRef.withdraw(withdrawID: id)
                             receiverRef.deposit(token: <- nft)

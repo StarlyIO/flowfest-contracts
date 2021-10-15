@@ -49,6 +49,7 @@
 | StarlyCard               | 0x697d72a988a77070 | 0x5b82f21c0edf76e3 |
 | StarlyCardMarket         | 0x697d72a988a77070 | 0x5b82f21c0edf76e3 |
 | TheFabricant             | 0xbc9d692e2617a96e | 0xa0cbe021821c0965 |
+| TopShot                  | 0x877931736ee77cff | 0x0b2a3299cc857e29 |
 | TuneGO                   | 0x2b0150231c047a8c | 0x0d9bc5af3fc0c2e3 |
 | Vouchers (Jambb)         | 0xe94a6e229293f196 | 0x444f5ea22c6ea12c |
 

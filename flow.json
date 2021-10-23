@@ -169,6 +169,13 @@
         "mainnet": "0xf6fcbef550d97aa5"
       }
     },
+    "NFTStorefront": {
+      "source": "./contracts/NFTStorefront.cdc",
+      "aliases": {
+        "testnet": "0x94b06cfca1d8a476",
+        "mainnet": "0x4eb8a10cb9f87357"
+      }
+    },
     "NonFungibleToken": {
       "source": "./contracts/NonFungibleToken.cdc",
       "aliases": {
@@ -328,6 +335,7 @@
         "MatrixWorldFlowFestNFT",
         "MusicBlock",
         "Mynft",
+        "NFTStorefront",
         "NonFungibleToken",
         "NyatheesOVO",
         "RaceDay_NFT",

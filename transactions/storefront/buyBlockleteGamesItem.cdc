@@ -11,10 +11,10 @@ transaction(listingResourceID: UInt64, storefrontAddress: Address, buyPrice: UFi
     let listing: &NFTStorefront.Listing{NFTStorefront.ListingPublic}
 
     prepare(signer: AuthAccount) {
-	    if signer.borrow<&BlockleteGames_NFT.Collection>(from: BlockleteGames_NFT.CollectionStoragePath) == nil {
+        if signer.borrow<&BlockleteGames_NFT.Collection>(from: BlockleteGames_NFT.CollectionStoragePath) == nil {
             signer.save(<-BlockleteGames_NFT.createEmptyCollection(), to: BlockleteGames_NFT.CollectionStoragePath)
-		    signer.link<&BlockleteGames_NFT.Collection{NonFungibleToken.CollectionPublic,BlockleteGames_NFT.BlockleteGames_NFTCollectionPublic}>(BlockleteGames_NFT.CollectionPublicPath, target: BlockleteGames_NFT.CollectionStoragePath)
-	    }
+            signer.link<&BlockleteGames_NFT.Collection{NonFungibleToken.CollectionPublic,BlockleteGames_NFT.BlockleteGames_NFTCollectionPublic}>(BlockleteGames_NFT.CollectionPublicPath, target: BlockleteGames_NFT.CollectionStoragePath)
+        }
 
         self.storefront = getAccount(storefrontAddress)
             .getCapability<&NFTStorefront.Storefront{NFTStorefront.StorefrontPublic}>(NFTStorefront.StorefrontPublicPath)

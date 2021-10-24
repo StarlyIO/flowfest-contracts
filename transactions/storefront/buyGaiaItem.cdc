@@ -11,10 +11,10 @@ transaction(listingResourceID: UInt64, storefrontAddress: Address, buyPrice: UFi
     let listing: &NFTStorefront.Listing{NFTStorefront.ListingPublic}
 
     prepare(signer: AuthAccount) {
-	    if signer.borrow<&Gaia.Collection>(from: Gaia.CollectionStoragePath) == nil {
+        if signer.borrow<&Gaia.Collection>(from: Gaia.CollectionStoragePath) == nil {
             signer.save(<-Gaia.createEmptyCollection(), to: Gaia.CollectionStoragePath)
-		    signer.link<&{Gaia.CollectionPublic}>(Gaia.CollectionPublicPath, target: Gaia.CollectionStoragePath)
-	    }
+            signer.link<&{Gaia.CollectionPublic}>(Gaia.CollectionPublicPath, target: Gaia.CollectionStoragePath)
+        }
 
         self.storefront = getAccount(storefrontAddress)
             .getCapability<&NFTStorefront.Storefront{NFTStorefront.StorefrontPublic}>(NFTStorefront.StorefrontPublicPath)

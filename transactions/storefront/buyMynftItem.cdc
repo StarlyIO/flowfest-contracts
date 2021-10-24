@@ -11,10 +11,10 @@ transaction(listingResourceID: UInt64, storefrontAddress: Address, buyPrice: UFi
     let listing: &NFTStorefront.Listing{NFTStorefront.ListingPublic}
 
     prepare(signer: AuthAccount) {
-	    if signer.borrow<&Mynft.Collection>(from: Mynft.CollectionStoragePath) == nil {
+        if signer.borrow<&Mynft.Collection>(from: Mynft.CollectionStoragePath) == nil {
             signer.save(<-Mynft.createEmptyCollection(), to: Mynft.CollectionStoragePath)
-		    signer.link<&Mynft.Collection{NonFungibleToken.CollectionPublic, Mynft.MynftCollectionPublic}>(Mynft.CollectionPublicPath, target: Mynft.CollectionStoragePath)
-	    }
+            signer.link<&Mynft.Collection{NonFungibleToken.CollectionPublic, Mynft.MynftCollectionPublic}>(Mynft.CollectionPublicPath, target: Mynft.CollectionStoragePath)
+        }
 
         self.storefront = getAccount(storefrontAddress)
             .getCapability<&NFTStorefront.Storefront{NFTStorefront.StorefrontPublic}>(NFTStorefront.StorefrontPublicPath)

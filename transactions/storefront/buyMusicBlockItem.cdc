@@ -11,10 +11,10 @@ transaction(listingResourceID: UInt64, storefrontAddress: Address, buyPrice: UFi
     let listing: &NFTStorefront.Listing{NFTStorefront.ListingPublic}
 
     prepare(signer: AuthAccount) {
-	    if signer.borrow<&MusicBlock.Collection>(from: MusicBlock.CollectionStoragePath) == nil {
+        if signer.borrow<&MusicBlock.Collection>(from: MusicBlock.CollectionStoragePath) == nil {
             signer.save(<-MusicBlock.createEmptyCollection(), to: MusicBlock.CollectionStoragePath)
-		    signer.link<&MusicBlock.Collection{NonFungibleToken.CollectionPublic, MusicBlock.MusicBlockCollectionPublic}>(MusicBlock.CollectionPublicPath, target: MusicBlock.CollectionStoragePath)
-	    }
+            signer.link<&MusicBlock.Collection{NonFungibleToken.CollectionPublic, MusicBlock.MusicBlockCollectionPublic}>(MusicBlock.CollectionPublicPath, target: MusicBlock.CollectionStoragePath)
+        }
 
         self.storefront = getAccount(storefrontAddress)
             .getCapability<&NFTStorefront.Storefront{NFTStorefront.StorefrontPublic}>(NFTStorefront.StorefrontPublicPath)

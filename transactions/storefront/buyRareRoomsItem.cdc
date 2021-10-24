@@ -11,10 +11,10 @@ transaction(listingResourceID: UInt64, storefrontAddress: Address, buyPrice: UFi
     let listing: &NFTStorefront.Listing{NFTStorefront.ListingPublic}
 
     prepare(signer: AuthAccount) {
-	    if signer.borrow<&RareRooms_NFT.Collection>(from: RareRooms_NFT.CollectionStoragePath) == nil {
+        if signer.borrow<&RareRooms_NFT.Collection>(from: RareRooms_NFT.CollectionStoragePath) == nil {
             signer.save(<-RareRooms_NFT.createEmptyCollection(), to: RareRooms_NFT.CollectionStoragePath)
-		    signer.link<&RareRooms_NFT.Collection{NonFungibleToken.CollectionPublic, RareRooms_NFT.RareRooms_NFTCollectionPublic}>(RareRooms_NFT.CollectionPublicPath, target: RareRooms_NFT.CollectionStoragePath)
-	    }
+            signer.link<&RareRooms_NFT.Collection{NonFungibleToken.CollectionPublic, RareRooms_NFT.RareRooms_NFTCollectionPublic}>(RareRooms_NFT.CollectionPublicPath, target: RareRooms_NFT.CollectionStoragePath)
+        }
 
         self.storefront = getAccount(storefrontAddress)
             .getCapability<&NFTStorefront.Storefront{NFTStorefront.StorefrontPublic}>(NFTStorefront.StorefrontPublicPath)

@@ -11,10 +11,10 @@ transaction(listingResourceID: UInt64, storefrontAddress: Address, buyPrice: UFi
     let listing: &NFTStorefront.Listing{NFTStorefront.ListingPublic}
 
     prepare(signer: AuthAccount) {
-	    if signer.borrow<&StarlyCard.Collection>(from: StarlyCard.CollectionStoragePath) == nil {
+        if signer.borrow<&StarlyCard.Collection>(from: StarlyCard.CollectionStoragePath) == nil {
             signer.save(<-StarlyCard.createEmptyCollection(), to: StarlyCard.CollectionStoragePath)
-		    signer.link<&StarlyCard.Collection{NonFungibleToken.CollectionPublic,StarlyCard.StarlyCardCollectionPublic}>(StarlyCard.CollectionPublicPath,target: StarlyCard.CollectionStoragePath)
-	    }
+            signer.link<&StarlyCard.Collection{NonFungibleToken.CollectionPublic,StarlyCard.StarlyCardCollectionPublic}>(StarlyCard.CollectionPublicPath,target: StarlyCard.CollectionStoragePath)
+        }
 
         self.storefront = getAccount(storefrontAddress)
             .getCapability<&NFTStorefront.Storefront{NFTStorefront.StorefrontPublic}>(NFTStorefront.StorefrontPublicPath)

@@ -40,32 +40,9 @@ transaction() {
 
         let records: {Address: {String: [UInt64]}} = {
             Address(0x5f14b7e68e0bc3c3): {
-                "beam_fright": [1],
-                "blocklete_golf": [43150],
-                "chainmonsters": [315663],
-                "crave": [1],
-                "eternal": [0],
-                "everbloom": [1],
-                "fantastec_swap": [600],
-                "faze": [10],
-                "jambb": [0],
-                "king_of_the_dot": [1],
-                "klktn": [0],
-                "melos_studio": [100001],
-                "mynft": [10045],
-                "nft_genius": [101],
-                "ovo": [0],
-                "raceday_nft": [51730],
-                "rarerooms": [51707],
-                "rcrdshp": [240153],
-                "sportsicon": [61278412],
-                "starly": [8388],
-                "the_fabricant": [1],
-                "thing_fund": [4100],
-                "topshot": [681286],
-                "tunego": [1],
-                "whitematrix": [0],
-                "xtingles": [78687]
+                "mynft": [14397],
+                "starly": [13199],
+                "faze": [5907]
             }
         }
 

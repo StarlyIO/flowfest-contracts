@@ -3,7 +3,7 @@
 * `flow emulator`
 * `flow project deploy`
 * `flow accounts create --key e00591c315b218996e6d4372688dd7644d42dc1b80c19551339017a640a88088fa56ec7a5e33475c5284f98b13a2acfc8214631c8ca8ca6aec5f9bb6b665ba1c`
-* `flow transactions send transactions/transfer_flow.cdc 1.0 0x01cf0e2f2f715450`
+* `flow transactions send transactions/transfer_flow.cdc 100.0 0x01cf0e2f2f715450`
 * `flow scripts execute scripts/setup_check.cdc 0x01cf0e2f2f715450`
 * `flow transactions send transactions/setup_account.cdc --signer emulator-debug`
 * `flow scripts execute scripts/setup_check.cdc 0x01cf0e2f2f715450`
@@ -13,6 +13,12 @@
 * `flow scripts execute scripts/setup_check.cdc 0x5f14b7e68e0bc3c3 --network mainnet`
 * `flow scripts execute scripts/read_collections_length.cdc 0x5f14b7e68e0bc3c3 --network mainnet`
 * `flow scripts execute scripts/read_collections_length_testnet.cdc 0x22a706cc6b8fe63b --network testnet`
+
+## Storefront
+
+* `flow transactions send transactions/mint_starly_card.cdc 0x01cf0e2f2f715450 12345/1/1`
+* `flow transactions send transactions/storefront/sellStarlyCardItem.cdc 0 10.0 "{0xf8d6e0586b0a20c7: 0.1}" --signer emulator-debug`
+* `flow transactions send transactions/storefront/buyStarlyCardItem.cdc 92 0x1cf0e2f2f715450 10.0 --signer emulator-debug`
 
 # Contract addresses
 
@@ -56,6 +62,6 @@
 
 # Important addresses
 
-| Name                     | Testnet            | Mainnet            |
-| ------------------------ | ------------------ | ------------------ |
-| Starly FF Admin          | 0x22a706cc6b8fe63b | 0x5f14b7e68e0bc3c3 |
+| Name                     | Testnet              | Mainnet              |
+| ------------------------ | -------------------- | -------------------- |
+| Starly FF Admin          | `0x22a706cc6b8fe63b` | `0x5f14b7e68e0bc3c3` |

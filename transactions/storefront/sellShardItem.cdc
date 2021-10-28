@@ -2,7 +2,7 @@ import FungibleToken from "../../contracts/FungibleToken.cdc"
 import NonFungibleToken from "../../contracts/NonFungibleToken.cdc"
 import NFTStorefront from "../../contracts/NFTStorefront.cdc"
 import FlowToken from "../../contracts/FlowToken.cdc"
-import Shard from "../contracts/Shard.cdc"
+import Shard from "../../contracts/Shard.cdc"
 
 transaction(saleItemID: UInt64, saleItemPrice: UFix64, saleCutPercents: {Address: UFix64}) {
     let flowTokenReceiver: Capability<&FlowToken.Vault{FungibleToken.Receiver}>

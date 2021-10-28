@@ -2,7 +2,7 @@ import FungibleToken from "../../contracts/FungibleToken.cdc"
 import NonFungibleToken from "../../contracts/NonFungibleToken.cdc"
 import NFTStorefront from "../../contracts/NFTStorefront.cdc"
 import FlowToken from "../../contracts/FlowToken.cdc"
-import RareRooms_NFT from "../contracts/RareRooms_NFT.cdc"
+import RareRooms_NFT from "../../contracts/RareRooms_NFT.cdc"
 
 transaction(saleItemID: UInt64, saleItemPrice: UFix64, saleCutPercents: {Address: UFix64}) {
     let flowTokenReceiver: Capability<&FlowToken.Vault{FungibleToken.Receiver}>

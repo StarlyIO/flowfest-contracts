@@ -33,6 +33,24 @@ transaction(saleItemID: UInt64, saleItemPrice: UFix64, saleCutPercents: {Address
 
         self.storefrontPublic = signer.getCapability<&NFTStorefront.Storefront{NFTStorefront.StorefrontPublic}>(NFTStorefront.StorefrontPublicPath)
         assert(self.storefrontPublic.borrow() != nil, message: "Could not borrow public storefront from address")
+
+        self.saleCuts = [];
+        var remainingPrice = saleItemPrice
+        for address in saleCutPercents.keys {
+            let account = getAccount(address);
+            let saleCutFlowTokenReceiver = account.getCapability<&FlowToken.Vault{FungibleToken.Receiver}>(/public/flowTokenReceiver)!
+            assert(saleCutFlowTokenReceiver.borrow() != nil, message: "Missing or mis-typed FlowToken receiver")
+            let amount = saleItemPrice * saleCutPercents[address]!
+            self.saleCuts.append(NFTStorefront.SaleCut(
+                receiver: saleCutFlowTokenReceiver,
+                amount: amount
+            ))
+            remainingPrice = remainingPrice - amount
+        }
+        self.saleCuts.append(NFTStorefront.SaleCut(
+            receiver: self.flowTokenReceiver,
+            amount: remainingPrice
+        ))
     }
 
     execute {

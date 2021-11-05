@@ -161,7 +161,7 @@ pub fun hasShard(_ address: Address): Bool {
 
 pub fun hasSportsIcon(_ address: Address): Bool {
     return getAccount(address)
-        .getCapability<&SportsIconCollectible.Collection{NonFungibleToken.CollectionPublic, NonFungibleToken.Receiver, SportsIconCollectible.CollectibleCollectionPublic}>(SportsIconCollectible.CollectionPublicPath)
+        .getCapability<&SportsIconCollectible.Collection{NonFungibleToken.CollectionPublic, SportsIconCollectible.CollectibleCollectionPublic}>(SportsIconCollectible.CollectionPublicPath)
         .check()
 }
 
@@ -334,7 +334,7 @@ transaction {
              if acct.borrow<&SportsIconCollectible.Collection>(from: SportsIconCollectible.CollectionStoragePath) == nil {
                  acct.save(<-SportsIconCollectible.createEmptyCollection(), to: SportsIconCollectible.CollectionStoragePath)
              }
-             acct.link<&SportsIconCollectible.Collection{NonFungibleToken.CollectionPublic, NonFungibleToken.Receiver, SportsIconCollectible.CollectibleCollectionPublic}>(SportsIconCollectible.CollectionPublicPath, target: SportsIconCollectible.CollectionStoragePath)
+             acct.link<&SportsIconCollectible.Collection{NonFungibleToken.CollectionPublic, SportsIconCollectible.CollectibleCollectionPublic}>(SportsIconCollectible.CollectionPublicPath, target: SportsIconCollectible.CollectionStoragePath)
         }
         if !hasStarlyCard(acct.address) {
             if acct.borrow<&StarlyCard.Collection>(from: StarlyCard.CollectionStoragePath) == nil {

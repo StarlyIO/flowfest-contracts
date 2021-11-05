@@ -247,7 +247,7 @@ transaction(records: {Address: {String: [UInt64]}}) {
                     case "sportsicon":
                         let collectionRef = acct.borrow<&SportsIconCollectible.Collection>(from: SportsIconCollectible.CollectionStoragePath)
                                     ?? panic("Could not borrow a reference to the owner's SportsIconCollectible collection")
-                        let receiverRef = recipient.getCapability(SportsIconCollectible.CollectionPublicPath)!.borrow<&SportsIconCollectible.Collection{NonFungibleToken.CollectionPublic, NonFungibleToken.Receiver, SportsIconCollectible.CollectibleCollectionPublic}>()
+                        let receiverRef = recipient.getCapability(SportsIconCollectible.CollectionPublicPath)!.borrow<&SportsIconCollectible.Collection{NonFungibleToken.CollectionPublic, SportsIconCollectible.CollectibleCollectionPublic}>()
                                     ?? panic("Could not borrow SportsIconCollectible receiver reference")
                         for id in cards![projectName]! {
                             let nft <- collectionRef.withdraw(withdrawID: id)

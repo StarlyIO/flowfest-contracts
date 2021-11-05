@@ -160,7 +160,7 @@ pub fun hasShard(_ address: Address): Bool {
 
 pub fun hasSportsIcon(_ address: Address): Bool {
     return getAccount(address)
-        .getCapability<&SportsIconCollectible.Collection{NonFungibleToken.CollectionPublic, NonFungibleToken.Receiver, SportsIconCollectible.CollectibleCollectionPublic}>(SportsIconCollectible.CollectionPublicPath)
+        .getCapability<&SportsIconCollectible.Collection{NonFungibleToken.CollectionPublic, SportsIconCollectible.CollectibleCollectionPublic}>(SportsIconCollectible.CollectionPublicPath)
         .check()
 }
 
